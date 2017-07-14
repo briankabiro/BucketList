@@ -1,0 +1,9 @@
+.header{
+	background-color: brown;
+	display:flex;
+	align-items: center;
+}
+.header a{
+	color:white;
+	text-decoration: none;
+}

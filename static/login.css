@@ -1,0 +1,47 @@
+.container{
+	display: flex;
+	height:100vh;
+	flex-direction:column;
+}
+.header{
+	flex:1;
+	background-color: dodgerblue;
+}
+.header h2{
+	color:#fff;
+	margin-left: 0.1em;
+	font-family: Century Gothic;
+}
+.main{
+	display: flex;
+	flex:12;
+	flex-flow:column; nowrap;
+	align-items: center;
+}
+.main h2{
+
+}
+form{
+	display: flex;
+	flex-direction: column;
+	margin-top: 5em;
+}
+form button{
+	padding:0.7em;
+	width:10em;
+	color:white;
+	background-color: dodgerblue;
+	border:none;
+	border-radius: 1%;
+}
+form input{
+	padding:0.5em;
+	border-radius: 5%;
+	margin-bottom: 1em;
+}
+form label{
+	font-size: 1.2em;
+}
+#bottom-paragraph{
+	font-family: Calibri;
+}
