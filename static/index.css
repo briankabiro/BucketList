@@ -1,4 +1,22 @@
-.signup-form{
+.container{
 	display: flex;
 	flex-direction: column;
+}
+.header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex:1;
+}
+.right-header-links{
+	display: flex;
+	justify-content: space-between;
+}
+.content{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex:9;
+	background-color: orange;
 }
