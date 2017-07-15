@@ -1,6 +1,11 @@
+body{
+	background:url("../assets/backpack.jpg");
+	background-size: cover;	
+}
 .container{
 	display: flex;
 	flex-direction: column;
+	height:100vh;
 }
 .header{
 	display: flex;
@@ -8,15 +13,36 @@
 	align-items: center;
 	flex:1;
 }
+.header h1{
+	font-family: Calibri;
+}
+.header *{
+	color:white;
+}
+.header p{
+	margin-right: 1em;
+	font-family: Calibri;
+	font-size:1.1em;
+}
 .right-header-links{
 	display: flex;
-	justify-content: space-between;
+}
+.right-header-links p a{
+	text-decoration: none;
 }
 .content{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	align-items: flex-end;
 	flex:9;
-	background-color: orange;
+}
+.content h2{
+	color:white;
+	font-size: 1.6em;
+	margin-top: 6em;
+	font-family: Century Gothic;
+}
+.content p{
+	color:white;
+	font-family: Century Gothic;
 }
