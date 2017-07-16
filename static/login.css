@@ -5,12 +5,16 @@
 }
 .header{
 	flex:1;
-	background-color: dodgerblue;
+	background-color: #795548;
 }
 .header h2{
 	color:#fff;
 	margin-left: 0.1em;
 	font-family: Century Gothic;
+}
+.header h2 a{
+	color:#fff;
+	text-decoration: none;
 }
 .main{
 	display: flex;
@@ -30,7 +34,7 @@ form button{
 	padding:0.7em;
 	width:10em;
 	color:white;
-	background-color: dodgerblue;
+	background-color:#795548;	
 	border:none;
 	border-radius: 1%;
 }
