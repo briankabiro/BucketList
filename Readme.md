@@ -1,8 +1,7 @@
 ## Description
 > This is a bucket list web app built with Python (Flask)
+
 ----
-## usage
-1. User can login.
-2. User can view bucket list.
-3. User can create bucket list.
-4. User can add items to bucket list.
+## How to Setup the Project
+1. Simply clone the repo by running ```https://github.com/briankabiro/Bucket-List.git```.
+2. Install dependencies as per the requirements.txt file within your virtual environment. ```pip install -r requirements.txt```.
