@@ -1,0 +1,7 @@
+Flask==0.12.2
+Jinja2==2.9.6
+pylint==1.7.2
+virtualenv==15.1.0
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.7.2
+
