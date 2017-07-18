@@ -6,11 +6,27 @@
 </head>
 <body>
 	<div class="container">
-		<div class="header">
-			<a href="index.html"><h2>Bucket list</h2></a>
-		</div>
-		<div class="main">
-		</div>
-	</div>
+        <div class="header">
+            <a href="/"><h2>Bucketlist</h2></a>
+            <div class="right-header-items">
+                <button id="add-button">+</button>
+                <!--Add hello,name of user -->
+            </div>
+        </div>
+        <div class="main">
+            <h2>Bucket Lists</h2>
+            <div class="bucket-lists">
+                <div id="bucket-list">
+                    <form id="add-item-form">
+                        <input id= "add-item-input" type="text" name="add-item-input">
+                        <button type="submit">Add an Item</button>
+                    </form>
+                    <ul id="items-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="../static/view.js"></script>
 </body>
 </html>
