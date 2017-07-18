@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/briankabiro/Bucket-List/badge.svg?branch=master)](https://coveralls.io/github/briankabiro/Bucket-List?branch=master)
+
 ## Description
 > This is a bucket list web app built with Python (Flask)
 
