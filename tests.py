@@ -1,5 +1,5 @@
 import unittest
-from app.app import Bucketlist
+from app.app import Bucketlist, User
 
 class TddinBucketlist(unittest.TestCase):
 	def setUp(self):
@@ -24,6 +24,13 @@ class TddinBucketlist(unittest.TestCase):
 		self.bucketlist.add_item("One")
 		self.bucketlist.add_item("Two")
 		self.assertEqual(len(self.bucketlist.bucket),2)
+
+class TddinUser(unittest.TestCase):
+	def setUp(self):
+		self.user = User("user","1234")
+
+	def test_user_created(self):
+		self.assertEqual(self.user.name,"user")
 		
 if __name__ == '__main__':
 	unittest.main()
