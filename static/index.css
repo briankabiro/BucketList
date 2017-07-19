@@ -30,19 +30,24 @@ body{
 .right-header-links p a{
 	text-decoration: none;
 }
-.content{
+.main{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
 	flex:9;
 }
-.content h2{
+#content{
+	text-align: center;
+}
+#content h2{
 	color:white;
-	font-size: 1.6em;
+	font-size: 1.8em;
 	margin-top: 6em;
 	font-family: Century Gothic;
 }
-.content p{
+#content p{
 	color:white;
 	font-family: Century Gothic;
+	font-size:1.2em;
+	font-weight: bold;
 }

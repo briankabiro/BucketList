@@ -5,7 +5,7 @@
 }
 .header{
 	flex:1;
-	background-color: #795548;
+	background-color: #ff0000;
 }
 .header h2{
 	color:#fff;
@@ -23,7 +23,7 @@
 	align-items: center;
 }
 .main h2{
-
+	font-family: Helvetica
 }
 form{
 	display: flex;
@@ -34,9 +34,10 @@ form button{
 	padding:0.7em;
 	width:10em;
 	color:white;
-	background-color:#795548;	
+	background-color:#ff0000;	
 	border:none;
 	border-radius: 1%;
+	font-size:1.1em	;
 }
 form input{
 	padding:0.5em;

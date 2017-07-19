@@ -4,8 +4,9 @@
 	flex:1;
 	height: 100vh;
 }
+
 .header{
-	background-color: #4F83F0;
+	background-color: #ff0000;
 	display:flex;
 	align-items: center;
 	margin-top: -1em;
@@ -13,45 +14,57 @@
 	flex:1;
 	justify-content: space-between;
 }
+
 .header a{
 	color:white;
 	text-decoration: none;
+	font-family: Calibri;
 }
+
 .right-header-items button{
-	background-color:#ff0000;
+	background-color:black;
 	color:white;
 	border-radius: 10%;
 	border:none;
 	font-size: 1.5em;
 	margin-right: 1em;
 	cursor: pointer;
+	padding:0 0.2em 0 0.2em;
 }
+
 .main{
-	flex:15;
+	flex:12;
 }
+
 .main h2{
 	font-family: Century Gothic;
 }
+
 .bucket-lists{
 	display: flex;
 }
+
 #bucket-list{
 	width:20em;
 	height:25em;
 	border:2px solid grey;
 	border-radius: 1%;
+	margin-right:1em;
 }
+
 #add-item-form{
 	display: flex;
 	justify-content: center;
 	margin-top: 1em;
 }
+
 #title-input{
 	border-top:none;
 	border-right:none;
 	border-left:none;
 	border-bottom:1px solid black;
 }
+
 #bucket-list button{
 	border:none;
 	background-color:#03d496;
@@ -62,6 +75,34 @@
 	border-radius:5%;
 	margin-left:0.5em;
 }
+
+#items-list{
+	margin:0;
+	border:0;
+}
+
 #items-list li{
 	list-style-type: none;
+	cursor:pointer;
+	user-select:none;
+}
+
+#items-list li.checked{
+	background:#888;
+	color:#fff;
+	text-decoration: line-through;
+}
+
+.list-item{
+	display: flex;
+	flex-direction: row nowrap;
+	justify-content: space-around;
+	align-items: center;
+	background-color: grey;
+}
+.close *{
+	font-size:1.1em;
+}
+.close:hover{
+	background-color: coral;
 }
