@@ -47,3 +47,4 @@ Temporary Items
 .apdisk
 
 myenv/
+__pycache__/
