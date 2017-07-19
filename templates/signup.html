@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% import "bootstrap/wtf.html" as wtf %}
 <html>
 <head>
 	<title>Sign Up</title>
@@ -7,18 +7,17 @@
 <body>
 <div class="container">
 	<div class="header">
-		<h2><a href="index.html">Bucket List</a></h2>
+		<h2><a href="/">Bucket List</a></h2>
 	</div>	
 	<div class="main">
 		<h2>Sign Up for Bucket List</h2>
-		<form>
-			<label>Username</label>
-			<input type="text" name="">
-			<label>Password</label>
-			<input type="password" name="">
+		<form action="/signup" method="POST">
+			{{ form.hidden_tag() }}
+			{{ wtf.form_field(form.username) }}
+			{{ wtf.form_field(form.password) }}
 			<button>Sign Up</button>
 		</form>
-		<p id="bottom-paragraph">Already have an account? <a href="login.html">Login</a></p>
+		<p id="bottom-paragraph">Already have an account? <a href="login">Login</a></p>
 	</div>
 </div>
 </body>
