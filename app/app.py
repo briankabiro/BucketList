@@ -87,7 +87,7 @@ def signup():
     if form.validate_on_submit():
         new_user.name = form.username.data
         new_user.password = form.password.data
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
     return render_template("signup.html", form=form)
 
 
@@ -100,7 +100,7 @@ def login():
         if new_user.name == form.username.data:
             if new_user.password == form.password.data:
                 return redirect(url_for('view'))
-        return "<h1>Invalid username and password</h1>"
+        return redirect(url_for('login'))
     return render_template("login.html", form=form)
 
 
@@ -142,7 +142,7 @@ def view():
             return jsonify(new_bucket.bucket)
 
     else:
-        if new_user:
+        if new_user.name != "":
             return render_template('view.html',user = new_user.name)
         return redirect(url_for('login'))
 
