@@ -1,6 +1,6 @@
   //create task
 let create = false;
-let present = false;
+let present = true;
 
 function createBucket(text,title){
   if (present){
@@ -16,7 +16,7 @@ function createBucket(text,title){
         console.log("data was sent and received",response);
         create = true
         response.forEach(function(itemObject){
-          var markup = '<div class="list-item"><span>'+ itemObject.body +'</span><div class="close-div"><span class="close">x</span></div></div>';
+          var markup = '<div class="list-item"><span>'+ itemObject.body +'</span><button class="close">x</button></div>';
           $('#items-list').append(markup);        
         })
       },
@@ -47,7 +47,7 @@ function createItem(text){
         console.log("data was sent and received",response);
         $('#items-list').html("")
         response.forEach(function(itemObject){
-          var markup = '<div class="list-item"><span>'+ itemObject.body +'</span><div class="close-div"><span class="close">x</span></div></div>';
+          var markup = '<div class="list-item"><span>'+ itemObject.body +'</span><button class="close">x</button></div>';
           $('#items-list').append(markup);
         })
       },
@@ -57,19 +57,6 @@ function createItem(text){
     })
     $('#add-item-input').val('');
 }
-
-
-$('#create-button').click(function(e){
-  //change display-type to 
-  e.preventDefault();
-  if ($('#bucket-list').style.visibility == 'hidden'){
-    $('#bucket-list').style.visibility = 'visible'
-  }else{
-    $('#bucket-list').style.visibility = 'hidden'
-  }
-})
-
-
 
 
 $("#add-item-form").on('submit',function(e){
@@ -114,22 +101,11 @@ $('#delete-button').on('click',function(e){
   }   
 })
 
-$(document).on('submit', '#title', function() {
-    $(this).removeAttr('disabled');
-});
-
-$(document).on('click', '#title', function() {
-    $(this).removeAttr('disabled');
-});
-
-$(".close-div").on('click', function(){
-  //get parent element and remove it from view
-  //send post request to the server with the Id of the element and then remove element from bucket dict
-  //return the new data
-  let parent = (".close").parent()
-  let index = $('div').index(parent)
-  console.log("this is the index",index)
-  console.log("this is the parent",parent)
+$('#items-list').on("click",".close",function(){
+  let div = this.parentElement;
+  let item = $(this).index()
+  console.log("this is index",item)
+  div.style.display = "none";
 })
 
 /* 
@@ -148,4 +124,11 @@ $(".close-div").on('click', function(){
   find a way to get id of the item from the DOM
   delete item from bucketlist
   return bucketlist
+$(document).on('submit', '#title', function() {
+    $(this).removeAttr('disabled');
+});
+
+$(document).on('click', '#title', function() {
+    $(this).removeAttr('disabled');
+});
 */

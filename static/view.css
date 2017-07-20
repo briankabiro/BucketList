@@ -63,7 +63,6 @@
 	font-weight: lighter;
 }
 
-
 .bucket-lists{
 	display: flex;
 	margin-top: 1em;
@@ -125,7 +124,7 @@
 	height:3em;
 	background-color: white;
 	margin:1em 0.5em 0.5em 0.5em;
-	border-left:0.2em solid #777AFC;
+	border-left:0.4em solid #777AFC;
 	box-shadow:1px 1px 1px 1px grey;
 }
 
@@ -133,20 +132,12 @@
 	color:black;
 }
 
-.close-div{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 100%;
-	background-color:#F9FAFE;
-	color:purple;
-	height:2em;
-	width:2em;
-}
-
 .close{
-	font-weight: bolder;
 	cursor: pointer;
+	border:none;
+	background-color: black;
+	border-radius: 50%;
+	color:white;
 }
 
 .close:hover{
@@ -154,8 +145,8 @@
 }
 
 #delete-button{
-	background:red;
-	/* add box shadow */
+	background:purple;
+	box-shadow: 0 1px 0 1px grey;
 	width:5em;
 	color:white;
 	font-family: Calibri;
@@ -168,6 +159,7 @@
 	box-shadow: 5px grey;
 	cursor: pointer;
 }
+
 #delete-button:hover{
 	opacity:0.9;
 }
