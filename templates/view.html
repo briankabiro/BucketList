@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="../static/view.css">
 </head>
 <body>
 	<div class="container">
         <div class="header">
-            <a href="/"><h2>Bucketlist</h2></a>
+            <a href="/"><h2>bucketlist</h2></a>
             <div class="right-header-items">
-                <button id="add-button">+</button>
                 <!--Add hello,name of user -->
+                <button id="create-button">Create a bucket</button>
+                <span id="hello-text">Hello, {{ user }}</span>
+                <button id="log-out-button">Log Out</button>
             </div>
         </div>
         <div class="main">
-            <h2>Your bucket lists</h2>
+            
+            <div id="top-area">
+                <h2>Your bucket lists</h2>
+            </div>
+
             <div class="bucket-lists">
                 <div id="bucket-list">
-                    <form id="add-item-form">
-                        <input id= "add-item-input" type="text" name="add-item-input" required>
-                        <button>Add an Item</button>
-                    </form>
-                    <ul id="items-list"></ul>
+                        <input type="text" id='title-input' name="title" placeholder="Name of the bucket" required>
+                        
+                        <form id="add-item-form">
+                            <input id= "add-item-input" type="text" name="add-item-input" required>
+                            <button>Add an Item</button>
+                        </form>
+                    
+                    <div id="items-list"></div>
+                    <button id="delete-button">DELETE</button>
                 </div>
             </div>
         </div>

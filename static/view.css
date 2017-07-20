@@ -6,7 +6,7 @@
 }
 
 .header{
-	background-color: #ff0000;
+	background-color: #23233c;
 	display:flex;
 	align-items: center;
 	margin-top: -1em;
@@ -19,37 +19,67 @@
 	color:white;
 	text-decoration: none;
 	font-family: Calibri;
+	margin-left: 2em;
+	font-size:0.9em;
 }
 
-.right-header-items button{
-	background-color:black;
-	color:white;
-	border-radius: 10%;
+.right-header-items{
+	display: flex;
+	align-items: center;
+}
+
+.right-header-items *{
+	margin-right: 2em;
+	font-family: Calibri;
+}
+
+#create-button,#log-out-button{
+	background:#F9FAFE;
 	border:none;
-	font-size: 1.5em;
-	margin-right: 1em;
-	cursor: pointer;
-	padding:0 0.2em 0 0.2em;
+	border-radius:2%;
+	color:#23233c;
+	font-weight: bold;
+	height:2em;
+	cursor:pointer;
+}
+
+#hello-text{
+	color:#F9FAFE;
 }
 
 .main{
 	flex:12;
 }
 
-.main h2{
-	font-family: Century Gothic;
+#top-area{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
+
+
+#top-area h2{
+	font-family: Arial;
+	font-weight: lighter;
+}
+
 
 .bucket-lists{
 	display: flex;
+	margin-top: 1em;
 }
 
 #bucket-list{
+	box-sizing: border-box;
 	width:20em;
-	height:25em;
-	border:2px solid grey;
-	border-radius: 1%;
-	margin-right:1em;
+	background:#F9FAFE;
+	min-height:27em;
+	/*  add box shadow*/
+	box-shadow: 5px 5px 5px 5px #888888;
+	margin-left:2em;
+	display: flex;
+	flex-direction: column;
+	height:auto;
 }
 
 #add-item-form{
@@ -59,13 +89,17 @@
 }
 
 #title-input{
-	border-top:none;
-	border-right:none;
-	border-left:none;
-	border-bottom:1px solid black;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	margin: 1em 0.5em 0.5em 0.5em;
+	font-size:1.1em;
+	color:black;
+	align-self: center;
+	font-weight: bold;
 }
 
-#bucket-list button{
+#add-item-form button{
 	border:none;
 	background-color:#03d496;
 	color:white;
@@ -76,16 +110,6 @@
 	margin-left:0.5em;
 }
 
-#items-list{
-	margin:0;
-	border:0;
-}
-
-#items-list li{
-	list-style-type: none;
-	cursor:pointer;
-	user-select:none;
-}
 
 #items-list li.checked{
 	background:#888;
@@ -98,11 +122,52 @@
 	flex-direction: row nowrap;
 	justify-content: space-around;
 	align-items: center;
-	background-color: grey;
+	height:3em;
+	background-color: white;
+	margin:1em 0.5em 0.5em 0.5em;
+	border-left:0.2em solid #777AFC;
+	box-shadow:1px 1px 1px 1px grey;
 }
-.close *{
-	font-size:1.1em;
+
+.list-item span{
+	color:black;
 }
+
+.close-div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100%;
+	background-color:#F9FAFE;
+	color:purple;
+	height:2em;
+	width:2em;
+}
+
+.close{
+	font-weight: bolder;
+	cursor: pointer;
+}
+
 .close:hover{
-	background-color: coral;
+	opacity: 0.7;
+}
+
+#delete-button{
+	background:red;
+	/* add box shadow */
+	width:5em;
+	color:white;
+	font-family: Calibri;
+	border:none;
+	padding:7px;
+	align-self: flex-end;
+	margin-top: auto;
+	margin-right: 1.5em;
+	margin-bottom: 1em;
+	box-shadow: 5px grey;
+	cursor: pointer;
+}
+#delete-button:hover{
+	opacity:0.9;
 }

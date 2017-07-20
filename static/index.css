@@ -38,6 +38,8 @@ body{
 }
 #content{
 	text-align: center;
+	display: flex;
+	flex-direction: column;
 }
 #content h2{
 	color:white;
@@ -48,6 +50,20 @@ body{
 #content p{
 	color:white;
 	font-family: Century Gothic;
-	font-size:1.2em;
+	font-size:1.3em;
 	font-weight: bold;
+}
+#get-started-button{
+	color:white;
+	background: black;
+	font-weight: bold;
+	border-radius: 5%;
+	width:10em;
+	align-self: center;
+	border:none;
+	padding:1em;
+	cursor:pointer;
+}
+#get-started-button:hover{
+	opacity: 0.7;
 }
