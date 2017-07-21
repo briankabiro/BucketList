@@ -15,6 +15,7 @@ Bootstrap(app)
 
 
 class LoginForm(FlaskForm):
+    """the class for the login form"""
     username = StringField(
         'Username', validators=[InputRequired(),
                                 Length(min=1)])
@@ -24,6 +25,7 @@ class LoginForm(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
+    """the class for the sign up form"""
     username = StringField(
         'Username', validators=[InputRequired(),
                                 Length(min=1)])
@@ -33,27 +35,33 @@ class RegisterForm(FlaskForm):
 
 
 class Bucketlist(object):
+    """ the class for a bucket list"""
     def __init__(self, name, bucket=[]):
         self.name = name
         self.bucket = bucket
 
     def return_name(self):
+        """ print the name of the bucket """
         print(self.name)
 
     def __del__(self):
+        """ delete the created object """
         return True
 
     def add_item(self, item):
+        """ add an item to the bucket """
         self.bucket.append({"Id": len(self.bucket), "body": item})
 
-    def update_item(self, Id, item):
+    def update_item(self, item_id, item):
+        """ update an existing item in the bucket """
         for i in self.bucket:
-            if i['Id'] == Id:
-                i['body'] == item
+            if i['Id'] == item_id:
+                i['body'] = item
 
-    def remove_item(self, Id):
+    def remove_item(self, item_id):
+        """ remove an item from the bucket"""
         for i in self.bucket:
-            if i['Id'] == Id:
+            if i['Id'] == item_id:
                 del i
 
 
@@ -64,9 +72,11 @@ class User(object):
         self.password = password
 
     def return_name(self):
+        """  return the name of the user """
         return self.name
 
     def __del__(self):
+        """ delete the created object """
         return True
 
 
@@ -82,7 +92,7 @@ def index():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    # return the signup page
+    """return the signup page"""
     form = RegisterForm()
     if form.validate_on_submit():
         new_user.name = form.username.data
@@ -93,7 +103,7 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # return the login page
+    """ return the login page"""
     form = LoginForm()
     print(new_user.name, new_user.password)
     if form.validate_on_submit():
@@ -106,7 +116,7 @@ def login():
 
 @app.route('/view', methods=['GET', 'POST'])
 def view():
-    # return the view page
+    """ return the view page """
 
     if request.method == 'POST':
         requestDict = request.form.to_dict()
@@ -130,21 +140,26 @@ def view():
 
         elif requestDict['method'] == 'removeItem':
             # get the id of element in bucket list and delete it
-            new_bucket.remove_item(1)
+            new_bucket.remove_item(requestDict['index'])
+            print('item has been removed from bucket')
+            return jsonify(new_bucket.bucket)
 
         elif requestDict['method'] == 'delete':
             # id is gotten from the data sent from the client
             new_bucket.__del__()
-            return ("successfully deleted")
+            return "successfully deleted"
 
-        elif requestDict['method'] == 'read':
+        elif requestDict['method'] == 'logout':
             # return the bucket
-            return jsonify(new_bucket.bucket)
+            new_user.name = ""
+            new_user.password = ""
+            return redirect(url_for('index'))
 
     else:
         if new_user.name != "":
-            return render_template('view.html',user = new_user.name)
+            return render_template('view.html', user=new_user.name)
         return redirect(url_for('login'))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
