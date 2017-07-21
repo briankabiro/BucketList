@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/briankabiro/Bucket-List.svg?branch=master)](https://travis-ci.org/briankabiro/Bucket-List)
 [![Coverage Status](https://coveralls.io/repos/github/briankabiro/Bucket-List/badge.svg?branch=master)](https://coveralls.io/github/briankabiro/Bucket-List?branch=master)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/briankabiro/Bucket-List)
 
