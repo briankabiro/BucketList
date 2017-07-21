@@ -1,9 +1,165 @@
+.container{
+	display: flex;
+	flex-direction: column;
+	flex:1;
+	height: 100vh;
+}
+
 .header{
-	background-color: brown;
+	background-color: #23233c;
 	display:flex;
 	align-items: center;
+	margin-top: -1em;
+	margin-left: -0.5em;
+	flex:1;
+	justify-content: space-between;
 }
+
 .header a{
 	color:white;
 	text-decoration: none;
+	font-family: Calibri;
+	margin-left: 2em;
+	font-size:0.9em;
+}
+
+.right-header-items{
+	display: flex;
+	align-items: center;
+}
+
+.right-header-items *{
+	margin-right: 2em;
+	font-family: Calibri;
+}
+
+#create-button,#log-out-button{
+	background:#F9FAFE;
+	border:none;
+	border-radius:2%;
+	color:#23233c;
+	font-weight: bold;
+	height:2em;
+	cursor:pointer;
+}
+
+#hello-text{
+	color:#F9FAFE;
+}
+
+.main{
+	flex:12;
+}
+
+#top-area{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+
+#top-area h2{
+	font-family: Arial;
+	font-weight: lighter;
+}
+
+.bucket-lists{
+	display: flex;
+	margin-top: 1em;
+}
+
+#bucket-list{
+	box-sizing: border-box;
+	width:20em;
+	background:#F9FAFE;
+	min-height:27em;
+	/*  add box shadow*/
+	box-shadow: 5px 5px 5px 5px #888888;
+	margin-left:2em;
+	display: flex;
+	flex-direction: column;
+	height:auto;
+}
+
+#add-item-form{
+	display: flex;
+	justify-content: center;
+	margin-top: 1em;
+}
+
+#title-input{
+	border: 0;
+	outline: 0;
+	background: transparent;
+	margin: 1em 0.5em 0.5em 0.5em;
+	font-size:1.1em;
+	color:black;
+	align-self: center;
+	font-weight: bold;
+}
+
+#add-item-form button{
+	border:none;
+	background-color:#03d496;
+	color:white;
+	font-weight: bold;
+	padding:0.5em 0 0.5em 0;
+	width:7em;
+	border-radius:5%;
+	margin-left:0.5em;
+}
+
+
+#items-list li.checked{
+	background:#888;
+	color:#fff;
+	text-decoration: line-through;
+}
+
+.list-item{
+	display: flex;
+	flex-direction: row nowrap;
+	justify-content: space-around;
+	align-items: center;
+	height:3em;
+	background-color: white;
+	margin:1em 0.5em 0.5em 0.5em;
+	border-left:0.4em solid #777AFC;
+	box-shadow:1px 1px 1px 1px grey;
+}
+
+.list-item span{
+	color:black;
+}
+
+.close{
+	cursor: pointer;
+	border:none;
+	background-color: black;
+	border-radius: 50%;
+	color:white;
+}
+
+.close:hover{
+	opacity: 0.7;
+}
+
+#delete-button{
+	background:purple;
+	box-shadow: 0 1px 0 1px grey;
+	width:5em;
+	color:white;
+	font-family: Calibri;
+	border:none;
+	padding:7px;
+	align-self: flex-end;
+	margin-top: auto;
+	margin-right: 1.5em;
+	margin-bottom: 1em;
+	box-shadow: 5px grey;
+	cursor: pointer;
+}
+
+#delete-button:hover{
+	opacity:0.9;
 }

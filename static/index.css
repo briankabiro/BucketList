@@ -1,6 +1,11 @@
+body{
+	background:url("./images/backpack.jpg");
+	background-size: cover;	
+}
 .container{
 	display: flex;
 	flex-direction: column;
+	height:100vh;
 }
 .header{
 	display: flex;
@@ -8,15 +13,57 @@
 	align-items: center;
 	flex:1;
 }
+.header h1{
+	font-family: Calibri;
+}
+.header *{
+	color:white;
+}
+.header p{
+	margin-right: 1em;
+	font-family: Calibri;
+	font-size:1.1em;
+}
 .right-header-links{
 	display: flex;
-	justify-content: space-between;
 }
-.content{
+.right-header-links p a{
+	text-decoration: none;
+}
+.main{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	align-items: flex-end;
 	flex:9;
-	background-color: orange;
+}
+#content{
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+#content h2{
+	color:white;
+	font-size: 1.8em;
+	margin-top: 6em;
+	font-family: Century Gothic;
+}
+#content p{
+	color:white;
+	font-family: Century Gothic;
+	font-size:1.3em;
+	font-weight: bold;
+}
+#get-started-button{
+	color:white;
+	background: black;
+	font-weight: bold;
+	border-radius: 5%;
+	width:10em;
+	align-self: center;
+	border:none;
+	padding:1em;
+	cursor:pointer;
+}
+#get-started-button:hover{
+	opacity: 0.7;
 }

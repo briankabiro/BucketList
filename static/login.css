@@ -3,45 +3,62 @@
 	height:100vh;
 	flex-direction:column;
 }
+
 .header{
 	flex:1;
-	background-color: dodgerblue;
+	background-color: #23233c;
 }
+
 .header h2{
 	color:#fff;
 	margin-left: 0.1em;
-	font-family: Century Gothic;
+	font-family: Calibri;
+	margin-left: 2em;
 }
+
+.header h2 a{
+	color:#fff;
+	text-decoration: none;
+}
+
 .main{
 	display: flex;
 	flex:12;
 	flex-flow:column; nowrap;
 	align-items: center;
 }
-.main h2{
 
+.main h2{
+	font-family: Helvetica;
+	font-weight: lighter;
 }
+
 form{
 	display: flex;
 	flex-direction: column;
 	margin-top: 5em;
 }
+
 form button{
-	padding:0.7em;
-	width:10em;
+	padding:0.5em;
+	width:7em;
 	color:white;
-	background-color: dodgerblue;
+	background-color:#03d496;	
 	border:none;
 	border-radius: 1%;
+	font-size:1.1em	;
 }
+
 form input{
 	padding:0.5em;
 	border-radius: 5%;
 	margin-bottom: 1em;
 }
+
 form label{
 	font-size: 1.2em;
 }
+
 #bottom-paragraph{
 	font-family: Calibri;
 }
