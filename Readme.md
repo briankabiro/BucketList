@@ -2,11 +2,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/briankabiro/Bucket-List/badge.svg?branch=master)](https://coveralls.io/github/briankabiro/Bucket-List?branch=master)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/briankabiro/Bucket-List)
 
-## Description
-> This is a bucket list web app built with Python (Flask)
-
-----
-
 # Bucket List
 
 This is a bucket list application that allows users to create accounts and to login. Once logged in, a user can create a bucket list and add items to it.
