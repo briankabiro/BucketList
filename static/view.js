@@ -131,6 +131,7 @@ $('#items-list').on("click",".close",function(){
     }
   })
 })
+<<<<<<< HEAD
 
 
 
@@ -176,3 +177,6 @@ $(document).on('click', '#title', function() {
 });
 */
 
+=======
+  
+>>>>>>> 398495594158c90aefca3855cf7cebae77ec7874

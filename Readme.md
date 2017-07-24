@@ -18,8 +18,9 @@ What things you need to install the software and how to install them
 Python 3
 ```
 ## How to Setup the Project
-1. Simply clone the repo by running ```https://github.com/briankabiro/Bucket-List.git```.
+1. Clone the repo by running ```git clone https://github.com/briankabiro/Bucket-List.git```.
 2. Install dependencies as per the requirements.txt file within your virtual environment. ```pip install -r requirements.txt```.
+3. Start the app by running ```python app.py```
 
 
 ## Built With
