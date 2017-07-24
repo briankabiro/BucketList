@@ -22,18 +22,14 @@
             </div>
 
             <div class="bucket-lists">
-                <div id="bucket-list">
-                        <input type="text" id='title-input' name="title" placeholder="Name of the bucket" required>
-                        
-                        <form id="add-item-form">
-                            <input id= "add-item-input" type="text" name="add-item-input" required>
-                            <button>Add an Item</button>
-                        </form>
-                    
-                    <div id="items-list"></div>
-                    <button id="delete-button">DELETE</button>
-                </div>
+            
             </div>
+        <form name="createBucket" method="POST", action="/view/create_bucket">
+          <div class="form-group">
+            <input type="text" class="form-control" required placeholder="Bucket Name" id="title" name="bucket" value="{{ request.form.bucket }}">
+            <br>
+            <input type="submit" class="btn btn-primary" value="Add Bucket">
+          </div>
         </div>
     </div> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
