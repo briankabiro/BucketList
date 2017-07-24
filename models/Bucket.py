@@ -4,10 +4,8 @@ class Bucket(object):
         self.bucket = bucket
 
     def return_name(self):
+        # print the name of the created user
         print(self.name)
-
-    def __del__(self):
-        return True
 
     def add_item(self, item):
         self.bucket.append({"Id": len(self.bucket), "body": item})
