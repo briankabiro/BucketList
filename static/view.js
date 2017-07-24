@@ -2,6 +2,14 @@
 let create = false;
 let present = true;
 
+function renderMarkup(response){
+  response.forEach(function(itemObject){
+    var markup = '<div class="list-item"><span>'+ itemObject.body +'</span><button class="close">x</button></div>';
+    $('#items-list').append(markup);        
+  })
+}
+
+
 function createBucket(text,title){
   if (present){
     $.ajax({
@@ -15,10 +23,7 @@ function createBucket(text,title){
       success:function(response){
         console.log("data was sent and received",response);
         create = true
-        response.forEach(function(itemObject){
-          var markup = '<div class="list-item"><span>'+ itemObject.body +'</span><button class="close">x</button></div>';
-          $('#items-list').append(markup);        
-        })
+        renderMarkup(response)
       },
       error:function(err){
         console.log("error",err)
@@ -46,10 +51,7 @@ function createItem(text){
       success:function(response){
         console.log("data was sent and received",response);
         $('#items-list').html("")
-        response.forEach(function(itemObject){
-          var markup = '<div class="list-item"><span>'+ itemObject.body +'</span><button class="close">x</button></div>';
-          $('#items-list').append(markup);
-        })
+        renderMarkup(response)
       },
       error:function(err){
         console.log("error",err)
@@ -63,7 +65,6 @@ $("#add-item-form").on('submit',function(e){
   e.preventDefault()
   var text = $('#add-item-input').val()
   var title = $('#title-input').val()
-  console.log("these are text and title",text,title)
   if(text && title){
     if (create) {
       createItem(text)
@@ -75,6 +76,14 @@ $("#add-item-form").on('submit',function(e){
   }
 })
 
+$('#create-button').on('click',function(e){
+  e.preventDefault()
+  if (!present){
+    let markup = "<div id='bucket-list'><input type='text' id='title-input' name='title' placeholder='Name of the bucket' required><form id='add-item-form'><input id= 'add-item-input' type='text' name='add-item-input' required><button>Add an Item</button> </form><div id='items-list'></div><button id='delete-button'>DELETE</button></div>"
+    $('bucket-lists').append(markup)
+    present = true  
+  }
+})
 
 $('#delete-button').on('click',function(e){
   e.preventDefault()
@@ -103,11 +112,45 @@ $('#delete-button').on('click',function(e){
 
 $('#items-list').on("click",".close",function(){
   let div = this.parentElement;
-  let item = $(this).index()
-  console.log("this is index",item)
+  console.log("closer",$(this).closest("div").index())
+  let index = $(this).closest("div").index()
   div.style.display = "none";
+  $.ajax({
+    type:'POST',
+    url:'http://localhost/view',
+    data:{
+      method:'update',
+      index:index,
+    },
+    success:function(response){
+      console.log('index has been delivered')
+      renderMarkup(response)
+    },
+    error:function(error){
+      console.log("error",error)
+    }
+  })
 })
 
+
+
+
+$('#log-out-button').click(function(){
+  alert("we clicked")
+  $.ajax({
+    type:'POST',
+    url:'http://localhost:5000/view',
+    data:{
+      method:'logout',
+    },
+    success:function(response){
+      console.log('user has been logged out',response)
+    },
+    error:function (error) {
+      console.log("error",error)
+    }
+  })
+})
 /* 
   when add button pressed
   add input title and create button to DOM
@@ -132,3 +175,4 @@ $(document).on('click', '#title', function() {
     $(this).removeAttr('disabled');
 });
 */
+
