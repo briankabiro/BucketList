@@ -107,28 +107,4 @@ $('#items-list').on("click",".close",function(){
   console.log("this is index",item)
   div.style.display = "none";
 })
-
-/* 
-  when add button pressed
-  add input title and create button to DOM
-  when create is pressed 
-  send data to server and create bucket list
-  return bucketlist with input and button for adding
-  render bucketlist on frontend
-
-  send add item request to server
-  add item to bucket list
-  return bucket list
-
-  send delete item request to server
-  find a way to get id of the item from the DOM
-  delete item from bucketlist
-  return bucketlist
-$(document).on('submit', '#title', function() {
-    $(this).removeAttr('disabled');
-});
-
-$(document).on('click', '#title', function() {
-    $(this).removeAttr('disabled');
-});
-*/
+  
