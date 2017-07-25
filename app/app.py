@@ -1,24 +1,71 @@
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
 from wtforms.validators import InputRequired, Length
-from models.User import User
-from models.Bucket import Bucket
+
 buckets = {}
+users = {}
+global bucketCount
+global userCount
+global new_user
+userCount = 0
+bucketCount = 0
 
 app = Flask(
     __name__,
     static_url_path='/static',
     static_folder="../static",
     template_folder='../templates')
+
 app.config['SECRET_KEY'] = "secret_key"
+
 Bootstrap(app)
+
+class Bucket(object):
+    def __init__(self, name,Id,items=[]):
+        self.name = name
+        self.items = items
+        self.Id = Id
+        count = 0
+
+    def return_name(self):
+        # print the name of the created user
+        print(self.name)
+
+    def add_item(self, item):
+        self.items.append({"Id": count, "body": item})
+        count += 1
+
+    def update_item(self, Id, item):
+        for i in self.items:
+            if i['Id'] == Id:
+                i['body'] = item
+
+    def remove_item(self, Id):
+        for i in self.items:
+            if i['Id'] == Id:
+                del i
+
+class User(object):
+    #create new user
+    def __init__(self, name, password, Id):
+        self.name = name
+        self.password = password
+        self.Id = Id
+    def return_name(self):
+        return self.name
+
+    def __del__(self):
+        return True
+
+
+
 '''
     create views for different actions
     install nosetests
     set counter for creating ids
-    finish functions for 
+    finish functions for
 '''
 
 
@@ -42,58 +89,6 @@ class RegisterForm(FlaskForm):
                                 Length(min=1)])
 
 
-<<<<<<< HEAD
-class Bucketlist(object):
-    """ the class for a bucket list"""
-    def __init__(self, name, bucket=[]):
-        self.name = name
-        self.bucket = bucket
-
-    def return_name(self):
-        """ print the name of the bucket """
-        print(self.name)
-
-    def __del__(self):
-        """ delete the created object """
-        return True
-
-    def add_item(self, item):
-        """ add an item to the bucket """
-        self.bucket.append({"Id": len(self.bucket), "body": item})
-
-    def update_item(self, item_id, item):
-        """ update an existing item in the bucket """
-        for i in self.bucket:
-            if i['Id'] == item_id:
-                i['body'] = item
-
-    def remove_item(self, item_id):
-        """ remove an item from the bucket"""
-        for i in self.bucket:
-            if i['Id'] == item_id:
-                del i
-
-
-class User(object):
-    #create new user
-    def __init__(self, name="", password=""):
-        self.name = name
-        self.password = password
-
-    def return_name(self):
-        """  return the name of the user """
-        return self.name
-
-    def __del__(self):
-        """ delete the created object """
-        return True
-
-=======
->>>>>>> 398495594158c90aefca3855cf7cebae77ec7874
-
-global new_user
-new_user = User()
-
 @app.route('/')
 def index():
     # return the home page
@@ -103,11 +98,13 @@ def index():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     """return the signup page"""
+    global userCount
+    global new_user
     form = RegisterForm()
     if form.validate_on_submit():
-        new_user = User(form.username.data,form.password.data)
-        new_user.name = form.username.data
-        new_user.password = form.password.data
+        new_user = User(form.username.data,form.password.data,userCount)
+        userCount += 1
+        users[new_user.name] = new_user
         return redirect(url_for('view'))
     return render_template("signup.html", form=form)
 
@@ -115,8 +112,8 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """ return the login page"""
+    global new_user
     form = LoginForm()
-    print(new_user.name, new_user.password)
     if form.validate_on_submit():
         if new_user.name == form.username.data:
             if new_user.password == form.password.data:
@@ -127,101 +124,88 @@ def login():
 
 @app.route('/view', methods=['GET', 'POST'])
 def view():
-<<<<<<< HEAD
-    """ return the view page """
-
-    if request.method == 'POST':
-        requestDict = request.form.to_dict()
-        print(requestDict)
-        if requestDict['method'] == 'create':
-            # get name of bucketlist from input
-            global new_bucket
-            new_bucket = Bucketlist(requestDict['title'])
-            print("new bucket created")
-            text = requestDict['itemBody']
-            new_bucket.add_item(text)
-            return jsonify(new_bucket.bucket)
-
-        elif requestDict['method'] == 'add':
-            text = requestDict['data']
-            new_bucket.add_item(text)
-            return jsonify(new_bucket.bucket)
-
-        elif requestDict['method'] == 'updateItem':
-            new_bucket.update_item()
-
-        elif requestDict['method'] == 'removeItem':
-            # get the id of element in bucket list and delete it
-            new_bucket.remove_item(requestDict['index'])
-            print('item has been removed from bucket')
-            return jsonify(new_bucket.bucket)
-
-        elif requestDict['method'] == 'delete':
-            # id is gotten from the data sent from the client
-            new_bucket.__del__()
-            return "successfully deleted"
-
-        elif requestDict['method'] == 'logout':
-            # return the bucket
-            new_user.name = ""
-            new_user.password = ""
-            return redirect(url_for('index'))
-
-    else:
-        if new_user.name != "":
-            return render_template('view.html', user=new_user.name)
-        return redirect(url_for('login'))
-
-
-=======
     # return the view page
-    return render_template("view.html")
+    global new_user
+    if request.method == "GET":
+        return render_template("view.html")
+    else:
+        global bucketCount
+        global users
+        global new_user
+        data = request.form.to_dict()
+        bucket = data['bucket']
+        new_bucket = Bucket(bucket, bucketCount)
+        bucketCount += 1
+        print("these are the ",buckets)
+        if new_user.name in buckets:
+            buckets[new_user.name].append(new_bucket)
+        else:
+            buckets[new_user.name] = []
+            buckets[new_user.name].append(new_bucket)
+        return render_template('view.html',data=buckets[new_user.name],user=new_user.name)
 
-@app.route('/view/<bucket_id>/add_item')
-def add_item():
+
+@app.route('/bucket/<bucket_id>/add_item')
+def add_item(data):
     # add item to bucket
     #buckets[new_user][bucket_id].append(item`)
-    pass
+    # item.id, item.body
+    # add item with id and the body text
+    global new_user
+    for i in buckets:
+        if i['Id'] == bucket_id:
+            i.add_item(data)
 
 
-@app.route('/view/<bucket_id>/remove_item')
+@app.route('/bucket/<bucket_id>/remove_item')
 def remove_item():
     # remove item from the bucket list
-    pass
+    for i in buckets:
+        if i.Id == bucket_id:
+            i.remove_item(data)
 
-@app.route('/view/<bucket_id>/update_item')
+
+@app.route('/bucket/<bucket_id>/update_item')
 def update_item():
     # update the item in a bucket list
-    pass
+    #get the id and the data
+    for i in buckets[new_user.name]:
+        if i.Id == bucket_id:
+            i.update_item(data)
 
-@app.route("/view/create_bucket")
-def create_bucket_list():
-    # create a bucket list
-    if method == "POST":
-        title = request.method.title      
-        new_bucket = Bucket(title)
 
-        buckets[new_user].append(new_bucket)    
-
-@app.route('/view/<bucket_id>')
-def view_bucket():
+@app.route('/bucket/<bucket_id>' ,methods=['POST'])
+def view_bucket(bucket_id):
     # view the bucket list
-    return render_template('bucket.html')
+    if request.method == 'POST':
+        global new_user
+        for i in buckets[new_user.name]:
+            if i.Id == bucket_id:
+                print("this is i", i)
+                
+        print("this is the object I'm sending",bucket)   
+    return render_template('bucket.html',data=bucket)
+
 
 @app.route("/view/edit_bucket/<bucket_id>")
 def edit_bucket(bucket_id):
     # logic to edit a bucket list
     if request.method == 'POST':
         title = request.form['new_title']
-    return render_template('/view/edit_bucket.html')
+        redirect(url_for('view'))
+    else:
+        return render_template('edit_bucket.html')
+    
 
-
-@app.route("/view/delete_bucket")
-def delete_bucket_list(bucket_id):
+@app.route("/view/delete_bucket/<bucket_id>", methods=['POST'])
+def delete_bucket(bucket_id):
     # function that deletes a bucket list
-    pass
+    global new_user
+    for i in buckets[new_user.name]:
+        if i.Id == bucket_id:
+            buckets[new_user.name].remove(i)
+    return redirect(url_for('view'))
 
-        
->>>>>>> 398495594158c90aefca3855cf7cebae77ec7874
+
 if __name__ == "__main__":
     app.run(debug=True)
