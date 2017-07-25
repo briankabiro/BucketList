@@ -1,11 +1,12 @@
 
 <div>
-    <h2>{% bucket.name %}</h2>
-    <form method="POST" action="/view">
+    <h2>Bucket list</h2>
+    <form method="POST" action="bucket/{{ bucket['Id'] }}">
         <input type="text" name="item">
         <button>Add Item</button>
     </form>
-    {% for bucket in data %}
+
+    {% for item in data.items %}
     <ul>
         <li id="{{ item.id }}">
             {{ item.body }}

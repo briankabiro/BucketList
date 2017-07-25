@@ -9,7 +9,6 @@
         <div class="header">
             <a href="/"><h2>bucketlist</h2></a>
             <div class="right-header-items">
-                <!--Add hello,name of user -->
                 <button id="create-button">Create a bucket</button>
                 <span id="hello-text">Hello, {{ user }}</span>
                 <button id="log-out-button">Log Out</button>
@@ -29,8 +28,8 @@
                 <ul>
                     <li id="{{ bucket.Id }}">
                         {{ bucket.name }}
-                        <a href="/view/bucket/{{ bucket['Id'] }}">View</a>
-                        <form method="POST", action="/view/delete_bucket/{{ bucket['Id'] }}">
+                        <a href="/bucket/{{ bucket['Id'] }}">View</a>
+                        <form method="POST", action="/bucket/delete_bucket/{{ bucket['Id'] }}">
                             <button type="submit">X</button>
                         </form>
                     </li>
