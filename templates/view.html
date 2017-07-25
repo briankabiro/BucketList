@@ -20,16 +20,24 @@
             <div id="top-area">
                 <h2>Your bucket lists</h2>
             </div>
-
+            <form name="createBucket" id="create-bucket-form" method="POST", action="/view">
+                <input type="text" placeholder="Bucket Name" id="title" name="bucket" value="{{ request.form.title }}" required>
+                <input type="submit" class="btn btn-primary" value="Create Bucket">
+            </form>
             <div class="bucket-lists">
-            
+                {% for bucket in data %}
+                <ul>
+                    <li id="{{ bucket.Id }}">
+                        {{ bucket.name }}
+                        <a href="/view/bucket/{{ bucket['Id'] }}">View</a>
+                        <form method="POST", action="/view/delete_bucket/{{ bucket['Id'] }}">
+                            <button type="submit">X</button>
+                        </form>
+                    </li>
+                </ul>
+                {% endfor %}
             </div>
-        <form name="createBucket" method="POST", action="/view/create_bucket">
-          <div class="form-group">
-            <input type="text" class="form-control" required placeholder="Bucket Name" id="title" name="bucket" value="{{ request.form.bucket }}">
-            <br>
-            <input type="submit" class="btn btn-primary" value="Add Bucket">
-          </div>
+
         </div>
     </div> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

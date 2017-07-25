@@ -1,0 +1,19 @@
+
+<div>
+    <h2>{% bucket.name %}</h2>
+    <form method="POST" action="/view">
+        <input type="text" name="item">
+        <button>Add Item</button>
+    </form>
+    {% for bucket in data %}
+    <ul>
+        <li id="{{ item.id }}">
+            {{ item.body }}
+            <a href="/view/edit_bucket/{{ bucket['Id'] }}">Edit</a>     
+            <form method="POST", action="view/delete_item">
+                <button type="submit">X</button>
+            </form>
+        </li>
+    </ul>
+    {% endfor %}
+</div>
