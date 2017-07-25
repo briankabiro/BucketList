@@ -153,7 +153,7 @@ def add_item(data):
     # add item with id and the body text
     global new_user
     for i in buckets:
-        if i['Id'] == bucket_id:
+        if str(i['Id']) == bucket_id:
             i.add_item(data)
 
 
@@ -161,7 +161,7 @@ def add_item(data):
 def remove_item():
     # remove item from the bucket list
     for i in buckets:
-        if i.Id == bucket_id:
+        if str(i.Id) == bucket_id:
             i.remove_item(data)
 
 
@@ -170,24 +170,23 @@ def update_item():
     # update the item in a bucket list
     #get the id and the data
     for i in buckets[new_user.name]:
-        if i.Id == bucket_id:
+        if str(i.Id) == bucket_id:
             i.update_item(data)
 
 
-@app.route('/bucket/<bucket_id>' ,methods=['POST'])
+@app.route('/bucket/<bucket_id>' ,methods=['GET','POST'])
 def view_bucket(bucket_id):
     # view the bucket list
     if request.method == 'POST':
         global new_user
-        for i in buckets[new_user.name]:
-            if i.Id == bucket_id:
-                print("this is i", i)
-                
-        print("this is the object I'm sending",bucket)   
-    return render_template('bucket.html',data=bucket)
+        bucket = [i for i in buckets[new_user.name] if str(i.Id) == bucket_id ]
+        print("this is bycket", bucket)
+        return render_template('bucket.html', data=bucket)
+    else:
+        return render_template('bucket.html')
 
 
-@app.route("/view/edit_bucket/<bucket_id>")
+@app.route("/bucket/edit_bucket/<bucket_id>")
 def edit_bucket(bucket_id):
     # logic to edit a bucket list
     if request.method == 'POST':
@@ -197,12 +196,12 @@ def edit_bucket(bucket_id):
         return render_template('edit_bucket.html')
     
 
-@app.route("/view/delete_bucket/<bucket_id>", methods=['POST'])
+@app.route("/bucket/delete_bucket/<bucket_id>", methods=['POST'])
 def delete_bucket(bucket_id):
     # function that deletes a bucket list
     global new_user
     for i in buckets[new_user.name]:
-        if i.Id == bucket_id:
+        if str(i.Id) == bucket_id:
             buckets[new_user.name].remove(i)
     return redirect(url_for('view'))
 
