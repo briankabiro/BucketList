@@ -5,9 +5,8 @@ install:
   - pip install -r requirements.txt
   - pip install coveralls
   - pip install coverage
-script: 
-  - "coverage run --source=app -m tests/test"
-  - "coveralls"
+script:
+  - nosetests --with-coverage
 notifications:
   email: false
 after_success:
