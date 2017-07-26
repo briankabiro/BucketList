@@ -1,20 +1,30 @@
+<html>
+<link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div>
+        <h2>Bucket list</h2>
+        <form method="POST" action="/bucket/{{ bucket.Id }}/add_item">
+            <input type="text" name="item">
+            <button>Add Item</button>
+        </form>
 
-<div>
-    <h2>Bucket list</h2>
-    <form method="POST" action="bucket/{{ bucket['Id'] }}">
-        <input type="text" name="item">
-        <button>Add Item</button>
-    </form>
 
-    {% for item in data.items %}
-    <ul>
-        <li id="{{ item.id }}">
-            {{ item.body }}
-            <a href="/view/edit_bucket/{{ bucket['Id'] }}">Edit</a>     
-            <form method="POST", action="view/delete_item">
-                <button type="submit">X</button>
-            </form>
-        </li>
-    </ul>
-    {% endfor %}
+        {% for item in bucket.items %}
+        <ul class="bucket">
+            <li id="{{ item['Id']}}">
+                {{ item['body'] }}
+                <a href="/bucket/{{ bucket.Id }}/edit_item/{{ item['Id'] }}">Edit</a>   
+                <form method="POST", action="/bucket/{{ bucket.Id }}/remove_item/{{ item['Id'] }}">
+                    <button type="submit">X</button>
+                </form>
+            </li>
+        </ul>
+        {% endfor %}
 </div>
+</body>
+</html>

@@ -1,17 +1,24 @@
+
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="../static/view.css">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 </head>
 <body>
 	<div class="container">
         <div class="header">
+
             <a href="/"><h2>bucketlist</h2></a>
             <div class="right-header-items">
-                <button id="create-button">Create a bucket</button>
                 <span id="hello-text">Hello, {{ user }}</span>
-                <button id="log-out-button">Log Out</button>
+                <form method="POST" action="/logout">
+                    <button id="log-out-button">Log Out</button>
+                </form>
             </div>
         </div>
         <div class="main">
@@ -19,27 +26,57 @@
             <div id="top-area">
                 <h2>Your bucket lists</h2>
             </div>
-            <form name="createBucket" id="create-bucket-form" method="POST", action="/view">
-                <input type="text" placeholder="Bucket Name" id="title" name="bucket" value="{{ request.form.title }}" required>
-                <input type="submit" class="btn btn-primary" value="Create Bucket">
+
+            <form name="createBucket" id="create-bucket-form" method="POST", action="/view/create_bucket">
+                <input type="text" placeholder="Bucket Name" name="bucket" id="title" value="{{ request.form.title }}" required>
+                <input type="submit" id="create-button" value="Create Bucket">
             </form>
+
             <div class="bucket-lists">
                 {% for bucket in data %}
-                <ul>
-                    <li id="{{ bucket.Id }}">
+                <ul id="bucket-lists-list">
+                    <li id="{{ bucket['Id'] }}">
                         {{ bucket.name }}
-                        <a href="/bucket/{{ bucket['Id'] }}">View</a>
+                        <a href="/bucket/{{ bucket['Id'] }}"><button>View</button></a>
+                        <button id="{{ bucket['Id'] }}" data-toggle="modal" data-target="#editModal">Edit</button>
                         <form method="POST", action="/bucket/delete_bucket/{{ bucket['Id'] }}">
                             <button type="submit">X</button>
                         </form>
+                        <div id="editModal" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Edit Title</h4>
+                              </div>
+
+                              <div class="modal-body">
+                                  <form method="POST" action="/bucket/edit_bucket/{{ bucket['Id'] }}">
+                                    <input type="text" name="title">
+                                    <button>Change</button>
+                                  </form>
+                              </div>
+
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>                        
                     </li>
                 </ul>
-                {% endfor %}
+            {% endfor %}
             </div>
-
+        
         </div>
     </div> 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="../static/view.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 </html>
