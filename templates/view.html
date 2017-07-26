@@ -33,19 +33,19 @@
             </form>
 
             <div class="bucket-lists">
-                <ul id="bucket-lists-list">
+                <ul class = "list-group" >
                 {% for bucket in data %}
-                    <li id="{{ bucket['Id'] }}">
+                    <li class="list-group-item" >
                         {{ bucket.name }}
-                        <a href="/bucket/{{ bucket['Id'] }}"><button>View</button></a>
-                        <button id="{{ bucket['Id'] }}" data-toggle="modal" data-target="#editModal">Edit</button>
+                        <a href="/bucket/{{ bucket['Id'] }}"><button class="btn btn-primary">View</button></a>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#{{ bucket['Id'] }}">Edit</button>
                         <form method="POST", action="/bucket/delete_bucket/{{ bucket['Id'] }}">
-                            <button type="submit">X</button>
+                            <button class="btn btn-danger" type="submit">X</button>
                         </form>
-                        <div id="editModal" class="modal fade" role="dialog">
+                        <div id="{{ bucket['Id'] }}" class="modal fade" role="dialog">
                           <div class="modal-dialog">
 
-                            <!-- Modal content-->
+                            <!-- Content of modal-->
                             <div class="modal-content">
 
                               <div class="modal-header">
@@ -77,6 +77,5 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
-
 </body>
 </html>
