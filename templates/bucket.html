@@ -13,18 +13,17 @@
             <button>Add Item</button>
         </form>
 
-
-        {% for item in bucket.items %}
         <ul class="bucket">
+        {% for item in bucket.items %}
             <li id="{{ item['Id']}}">
                 {{ item['body'] }}
-                <a href="/bucket/{{ bucket.Id }}/edit_item/{{ item['Id'] }}">Edit</a>   
+                <a href="/bucket/{{ bucket.Id }}/edit_item/{{ item['Id'] }}">Edit</a>
                 <form method="POST", action="/bucket/{{ bucket.Id }}/remove_item/{{ item['Id'] }}">
                     <button type="submit">X</button>
                 </form>
             </li>
-        </ul>
         {% endfor %}
+        </ul>
 </div>
 </body>
 </html>

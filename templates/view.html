@@ -33,8 +33,8 @@
             </form>
 
             <div class="bucket-lists">
-                {% for bucket in data %}
                 <ul id="bucket-lists-list">
+                {% for bucket in data %}
                     <li id="{{ bucket['Id'] }}">
                         {{ bucket.name }}
                         <a href="/bucket/{{ bucket['Id'] }}"><button>View</button></a>
@@ -68,8 +68,8 @@
                           </div>
                         </div>                        
                     </li>
-                </ul>
             {% endfor %}
+            </ul>
             </div>
         
         </div>
