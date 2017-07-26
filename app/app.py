@@ -53,7 +53,8 @@ class Bucket(object):
 
     def remove_item(self, Id):
         for i in self.items:
-            if i['Id'] == Id:
+            if str(i['Id']) == Id:
+                print('this is i',i)
                 self.items.remove(i)
 
 
@@ -66,15 +67,6 @@ class User(object):
 
     def return_name(self):
         return self.name
-
-
-'''
-    create views for different actions
-    install nosetests
-    set counter for creating ids
-    finish functions for
-'''
-
 
 class LoginForm(FlaskForm):
     """the class for the login form"""
@@ -157,63 +149,15 @@ def create_bucket():
         return redirect(url_for('view'))
 
 
-@app.route('/bucket/<bucket_id>/add_item', methods=['POST'])
-def add_item(bucket_id):
-    # add item to bucket
-    data = request.form.to_dict()
-    item = data['item']
+@app.route('/bucket/<bucket_id>', methods=['GET', 'POST'])
+def view_bucket(bucket_id):
+    # view the bucket list
     bucket = [
         i for i in buckets[session['username']] if str(i.Id) == bucket_id
     ]
     bucket = bucket[0]
-    bucket.add_item(item)
     return render_template('bucket.html', bucket=bucket)
 
-
-@app.route('/bucket/<bucket_id>/remove_item/<item_id>', methods=['POST'])
-def remove_item(bucket_id, item_id):
-    # remove item from the bucket list
-    if request.method == 'POST':
-        bucket = [
-            i for i in buckets[session['username']] if str(i.Id) == bucket_id
-        ]
-        bucket = bucket[0]
-        item = [i for i in bucket.items if str(i['Id']) == bucket_id]
-        print("this is item", item)        
-        bucket.remove_item(item_id)
-        return redirect(url_for('bucket'))
-
-@app.route('/bucket/<bucket_id>/edit_item/<item_id>')
-def edit_item(bucket_id, item_id):
-    # update the item in a bucket list
-    #get the id and the data
-    if request.method == 'POST':
-        new_text = request.form('text')
-        bucket = [
-            i for i in buckets[session['username']] if str(i.Id) == bucket_id
-        ]
-        bucket = bucket[0]
-        item = [i for i in bucket.items if str(i['Id']) == item_id]
-        item = item[0]
-        bucket.update_item(item_id, new_text)
-        return render_template('bucket.html', bucket=bucket)
-
-
-@app.route('/bucket/<bucket_id>', methods=['GET', 'POST'])
-def view_bucket(bucket_id):
-    # view the bucket list
-    if request.method == 'POST':
-        bucket = [
-            i for i in buckets[session['username']] if str(i.Id) == bucket_id
-        ]
-        bucket = bucket[0]
-        return render_template('bucket.html', bucket=bucket)
-    else:
-        bucket = [
-            i for i in buckets[session['username']] if str(i.Id) == bucket_id
-        ]
-        bucket = bucket[0]
-        return render_template('bucket.html', bucket=bucket)
 
 
 @app.route("/bucket/edit_bucket/<bucket_id>", methods=['POST'])
@@ -238,9 +182,52 @@ def delete_bucket(bucket_id):
             print("this is buckets after deleting", buckets)
     return redirect(url_for('view'))
 
+@app.route('/bucket/<bucket_id>/add_item', methods=['POST'])
+def add_item(bucket_id):
+    # add item to bucket
+    data = request.form.to_dict()
+    item = data['item']
+    bucket = [
+        i for i in buckets[session['username']] if str(i.Id) == bucket_id
+    ]
+    bucket = bucket[0]
+    bucket.add_item(item)
+    return render_template('bucket.html', bucket=bucket)
+
+
+@app.route('/bucket/<bucket_id>/remove_item/<item_id>', methods=['POST'])
+def remove_item(bucket_id, item_id):
+    # remove item from the bucket list
+    if request.method == 'POST':
+        bucket = [
+            i for i in buckets[session['username']] if str(i.Id) == bucket_id
+        ]
+        bucket = bucket[0]
+        item = [i for i in bucket.items if str(i['Id']) == bucket_id]
+        print("this is item", item)
+        print('this is item id', item_id)      
+        bucket.remove_item(item_id)
+        return redirect('/bucket/' + bucket_id)
+
+@app.route('/bucket/<bucket_id>/edit_item/<item_id>')
+def edit_item(bucket_id, item_id):
+    # update the item in a bucket list
+    #get the id and the data
+    if request.method == 'POST':
+        new_text = request.form('text')
+        bucket = [
+            i for i in buckets[session['username']] if str(i.Id) == bucket_id
+        ]
+        bucket = bucket[0]
+        item = [i for i in bucket.items if str(i['Id']) == item_id]
+        item = item[0]
+        bucket.update_item(item_id, new_text)
+        return render_template('bucket.html', bucket=bucket)
+
 
 @app.route('/logout')
 def logout():
+    # logout a user
     session.pop('username')
     return redirect(url_for('index'))
 
