@@ -4,8 +4,10 @@ python:
 install: 
   - pip install -r requirements.txt
   - pip install coveralls
+  - pip install coverage
 script: 
-  coverage run tests.py
+  - "coverage run --source=app -m tests/test"
+  - "coveralls"
 notifications:
   email: false
 after_success:
