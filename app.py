@@ -1,7 +1,8 @@
 import os
 import sys
 sys.path.append(os.getcwd())
-
+from models.bucket import Bucket
+from models.user import User
 from flask import Flask, session, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
@@ -18,55 +19,12 @@ bucketCount = 0
 app = Flask(
     __name__,
     static_url_path='/static',
-    static_folder="../static",
-    template_folder='../templates')
+    static_folder="./static",
+    template_folder='./templates')
 
 app.config['SECRET_KEY'] = "secret_key"
 
 Bootstrap(app)
-
-
-class Bucket(object):
-    def __init__(self, name, Id, items=[], count=0):
-        self.name = name
-        self.items = items
-        self.Id = Id
-        self.count = count
-
-    def return_name(self):
-        # print the name of the created user
-        print(self.name)
-
-    def update_name(self, new_title):
-        print("this is the old title",self.name)
-        self.name = new_title
-        print("this is the new_title", self.name)
-
-    def add_item(self, item):
-        self.items.append({"Id": self.count, "body": item})
-        self.count += 1
-
-    def update_item(self, Id, item):
-        for i in self.items:
-            if i['Id'] == Id:
-                i['body'] = item
-
-    def remove_item(self, Id):
-        for i in self.items:
-            if str(i['Id']) == Id:
-                print('this is i',i)
-                self.items.remove(i)
-
-
-class User(object):
-    #create new user
-    def __init__(self, name, password, Id):
-        self.name = name
-        self.password = password
-        self.Id = Id
-
-    def return_name(self):
-        return self.name
 
 class LoginForm(FlaskForm):
     """the class for the login form"""
@@ -125,7 +83,7 @@ def login():
 @app.route('/view', methods=['GET'])
 def view():
     # return the view page
-    if session['username']:
+    if 'username' in session:
         if session['username'] not in buckets:
             buckets[session['username']] = []
         return render_template(
@@ -225,7 +183,7 @@ def edit_item(bucket_id, item_id):
         return render_template('bucket.html', bucket=bucket)
 
 
-@app.route('/logout')
+@app.route('/logout',methods=['POST'])
 def logout():
     # logout a user
     session.pop('username')
