@@ -99,20 +99,12 @@
 	margin-left:0.5em;
 }
 
-
-.list-item{
+#bucket-lists-list{
 	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items: center;
-	height:3em;
-	background-color: white;
-	margin:1em 0.5em 0.5em 0.5em;
-	border-left:0.4em solid #777AFC;
-	box-shadow:1px 1px 1px 1px grey;
+	flex-direction:column;
 }
 
-.list-item span{
-	color:black;
+#bucket-lists-list li{
+	display: flex;
+	justify-content: space-between;
 }
-
