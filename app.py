@@ -3,7 +3,7 @@ import sys
 sys.path.append(os.getcwd())
 from models.bucket import Bucket
 from models.user import User
-from flask import Flask, session, render_template, redirect, url_for, request
+from flask import Flask, session, render_template, redirect, url_for, request, flash
 from flask_bootstrap import Bootstrap
 from app.forms import LoginForm, RegisterForm
 
@@ -30,10 +30,11 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['GET','POST'])
 def signup():
     """return the signup page"""
     global userCount
+    error = None
     form = RegisterForm()
     if form.validate_on_submit():
         new_user = User(form.username.data, form.password.data, userCount)
@@ -44,7 +45,7 @@ def signup():
     return render_template("signup.html", form=form)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
     """ return the login page"""
     form = LoginForm()
@@ -142,31 +143,34 @@ def remove_item(bucket_id, item_id):
             i for i in buckets[session['username']] if str(i.Id) == bucket_id
         ]
         bucket = bucket[0]
-        item = [i for i in bucket.items if str(i['Id']) == bucket_id]
-        print("this is item", item)
-        print('this is item id', item_id)      
+        item = [i for i in bucket.items if str(i['Id']) == bucket_id] 
         bucket.remove_item(item_id)
         return redirect('/bucket/' + bucket_id)
 
-@app.route('/bucket/<bucket_id>/edit_item/<item_id>')
+@app.route('/bucket/<bucket_id>/edit_item/<item_id>', methods=['POST'])
 def edit_item(bucket_id, item_id):
     # update the item in a bucket list
     if request.method == 'POST':
-        new_text = request.form('text')
+        data = request.form.to_dict()
+        new_text = data['new_text']
         bucket = [
             i for i in buckets[session['username']] if str(i.Id) == bucket_id
         ]
         bucket = bucket[0]
         item = [i for i in bucket.items if str(i['Id']) == item_id]
         item = item[0]
+        print('this is item', item)
+        print('this is bucket',bucket)
+        
         bucket.update_item(item_id, new_text)
-        return render_template('bucket.html', bucket=bucket)
+        return redirect('/bucket/' + bucket_id)
 
 
 @app.route('/logout',methods=['POST'])
 def logout():
     # logout a user
     session.pop('username')
+    flash('You have been logged out')
     return redirect(url_for('index'))
 
 
