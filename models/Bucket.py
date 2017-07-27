@@ -7,12 +7,10 @@ class Bucket(object):
 
     def return_name(self):
         # print the name of the created user
-        print(self.name)
+        return self.name
 
     def update_name(self, new_title):
-        print("this is the old title",self.name)
         self.name = new_title
-        print("this is the new_title", self.name)
 
     def add_item(self, item):
         self.items.append({"Id": self.count, "body": item})
@@ -20,11 +18,10 @@ class Bucket(object):
 
     def update_item(self, Id, item):
         for i in self.items:
-            if i['Id'] == Id:
+            if str(i['Id']) == Id:
                 i['body'] = item
 
     def remove_item(self, Id):
         for i in self.items:
             if str(i['Id']) == Id:
-                print('this is i',i)
                 self.items.remove(i)
