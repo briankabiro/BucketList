@@ -1,11 +1,12 @@
 import unittest
-from app.app import Bucketlist, User
+from models.bucket import Bucket
+from models.user import User
 
 
 class TddinBucketlist(unittest.TestCase):
     def setUp(self):
         # create an object
-        self.bucketlist = Bucketlist("bucketlist")
+        self.bucketlist = Bucket("bucketlist")
 
     def Test_bucketlist_created(self):
         # test if object is created
@@ -40,10 +41,6 @@ class TddinUser(unittest.TestCase):
     def Test_user_created(self):
         # test if the user has been created
         self.assertEqual(self.user.name, "user")
-
-    def Test_user_logged_out(self):
-        # test if the user object is deleted
-        self.assertTrue(self.user.__del__())
 
 
 if __name__ == '__main__':
