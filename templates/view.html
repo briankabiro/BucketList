@@ -13,7 +13,7 @@
 	<div class="container-fluid">
   
         <div class="header">
-            <a href="/"><h2>bucketlist</h2></a>
+            <a href="/view"><h2>Home</h2></a>
             <div class="right-header-items">
                 <span id="hello-text">Hello, {{ user }}</span>
                 <form method="POST" action="/logout">
@@ -25,6 +25,7 @@
         <div class="main">
             <form name="createBucket" id="create-bucket-form" method="POST", action="/view/create_bucket">
                 <input type="text" placeholder="Bucket Name" name="bucket" id="title" required>
+
                 <button type="submit" id="create-button">Create Bucket</button>
             </form>
 
@@ -46,17 +47,18 @@
                                 <h2>{{ bucket.name }}</h2>
                             </td>
 
-                            <td>
-                                <a href="/bucket/{{ bucket['Id'] }}"><button class="btn btn-primary">View</button></a>
-                            </td>
-                            <td> 
-                                <button class="btn btn-success" data-toggle="modal" data-target="#{{ bucket['Id'] }}">Edit</button>
-                            </td>      
-                            <td>
-                                <form method="POST", action="/bucket/delete_bucket/{{ bucket['Id'] }}">
-                                        <button class="btn btn-danger" type="submit">X</button>
-                                </form>
-                            </td>
+                            
+                                <td><a href="/bucket/{{ bucket['Id'] }}"><button class="btn btn-primary">View</button></a></td>
+                            
+                            
+                                <td><button class="btn btn-success" data-toggle="modal" data-target="#{{ bucket['Id'] }}">Edit</button></td>
+                                 
+                            
+                                <td>
+                                    <form method="POST", action="/bucket/delete_bucket/{{ bucket['Id'] }}">
+                                            <button class="btn btn-danger" type="submit">X</button>
+                                    </form>
+                                </td>
                                 
                                 <div id="{{ bucket['Id'] }}" class="modal fade" role="dialog">
                                   <div class="modal-dialog">
@@ -72,7 +74,6 @@
                                       <div class="modal-body">
                                           <form method="POST" action="/bucket/edit_bucket/{{ bucket['Id'] }}">
                                             <input type="text" name="title">
-                                            <button>Change</button>
                                           </form>
                                       </div>
 

@@ -33,7 +33,7 @@
 	font-family: Calibri;
 }
 
-#create-button,#log-out-button{
+#log-out-button{
 	background:#F9FAFE;
 	border:none;
 	border-radius:2%;
@@ -41,6 +41,19 @@
 	font-weight: bold;
 	height:2em;
 	cursor:pointer;
+}
+#create-button-form{
+	margin-bottom:1em;
+}
+#create-button{
+	background:#0BDA85;
+	border:none;
+	border-radius:2%;
+	color:#F9FAFE;
+	font-weight: bold;
+	height:2em;
+	cursor:pointer;
+	margin-left: 1em;
 }
 
 #hello-text{
@@ -55,6 +68,7 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	margin-bottom: 1em;
 }
 
 
@@ -63,22 +77,8 @@
 	font-weight: lighter;
 }
 
-.bucket-lists{
-	display: flex;
-	margin-top: 1em;
-}
-
-#bucket-list{
-	box-sizing: border-box;
-	width:20em;
-	background:#F9FAFE;
-	min-height:27em;
-	/*  add box shadow*/
-	box-shadow: 5px 5px 5px 5px #888888;
-	margin-left:2em;
-	display: flex;
-	flex-direction: column;
-	height:auto;
+.table table-condensed{
+	width:50%;
 }
 
 #create-bucket-form{
@@ -93,7 +93,7 @@
 	background-color:#03d496;
 	color:white;
 	font-weight: bold;
-	padding:0.5em 0 0.5em 0;
+	padding:0.8em 0 0.8em 0;
 	width:7em;
 	border-radius:5%;
 	margin-left:0.5em;

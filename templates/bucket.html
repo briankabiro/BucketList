@@ -7,7 +7,7 @@
 <body>
     <div>
         <div class="header">
-            <a href="/"><h2>bucketlist</h2></a>
+            <a href="/view"><h2>bucketlist</h2></a>
             <div class="right-header-items">
                 <span id="hello-text">Hello, {{ user }}</span>
                 <form method="POST" action="/logout">
@@ -37,7 +37,7 @@
                 <td>{{ item['body'] }}</td>
                 
                 <td>
-                  <a href="/bucket/{{ bucket.Id }}/edit_item/{{ item['Id'] }}"><button class="btn btn-success" data-toggle="modal" data-target="#{{ item['Id'] }}">Edit</button></a>
+                  <button class="btn" data-toggle="modal" data-target="#{{ item['Id'] }}">Edit</button></a>
                 </td>
                 
                 <td>
@@ -58,15 +58,15 @@
                       </div>
 
                       <div class="modal-body">
-                          <form method="POST" action="/bucket/{{ bucket['Id'] }}/edit_item/{{ item['Id'] }}">
-                            <input type="text" name="title">
-                            <button>Change</button>
+                          <form name="edit-form" method="POST" action="/bucket/{{ bucket['Id'] }}/edit_item/{{ item['Id'] }}">
+                            <input type="text" name="new_text">
                           </form>
                       </div>
 
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                       </div>
+
                     </div>
 
                   </div>
