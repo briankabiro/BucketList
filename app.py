@@ -5,9 +5,7 @@ from models.bucket import Bucket
 from models.user import User
 from flask import Flask, session, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
-from wtforms.validators import InputRequired, Length
+from app.forms import LoginForm, RegisterForm
 
 buckets = {}
 users = []
@@ -25,26 +23,6 @@ app = Flask(
 app.config['SECRET_KEY'] = "secret_key"
 
 Bootstrap(app)
-
-class LoginForm(FlaskForm):
-    """the class for the login form"""
-    username = StringField(
-        'Username', validators=[InputRequired(),
-                                Length(min=1)])
-    password = PasswordField(
-        'Password', validators=[InputRequired(),
-                                Length(min=1)])
-
-
-class RegisterForm(FlaskForm):
-    """the class for the sign up form"""
-    username = StringField(
-        'Username', validators=[InputRequired(),
-                                Length(min=1)])
-    password = PasswordField(
-        'Password', validators=[InputRequired(),
-                                Length(min=1)])
-
 
 @app.route('/')
 def index():
@@ -70,12 +48,14 @@ def signup():
 def login():
     """ return the login page"""
     form = LoginForm()
+    error = None
     if form.validate_on_submit():
         for user in users:
             if user.name == form.username.data:
                 if user.password == form.password.data:
                     session['username'] = user.name
                     return redirect(url_for('view'))
+            error = 'Invalid credentials'
             return redirect(url_for('login'))
     return render_template("login.html", form=form)
 
@@ -96,6 +76,7 @@ def view():
 
 @app.route('/view/create_bucket', methods=['POST'])
 def create_bucket():
+    # create the bucket
     if session['username'] in buckets:
         global bucketCount
         data = request.form.to_dict()
@@ -150,7 +131,7 @@ def add_item(bucket_id):
     ]
     bucket = bucket[0]
     bucket.add_item(item)
-    return render_template('bucket.html', bucket=bucket)
+    return redirect('/bucket/' + bucket_id)
 
 
 @app.route('/bucket/<bucket_id>/remove_item/<item_id>', methods=['POST'])
@@ -170,7 +151,6 @@ def remove_item(bucket_id, item_id):
 @app.route('/bucket/<bucket_id>/edit_item/<item_id>')
 def edit_item(bucket_id, item_id):
     # update the item in a bucket list
-    #get the id and the data
     if request.method == 'POST':
         new_text = request.form('text')
         bucket = [
