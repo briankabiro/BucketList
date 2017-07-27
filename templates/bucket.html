@@ -1,24 +1,50 @@
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="../static/bucket.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
     <div>
-        <h2>Bucket list</h2>
+        <div class="header">
+            <a href="/"><h2>bucketlist</h2></a>
+            <div class="right-header-items">
+                <span id="hello-text">Hello, {{ user }}</span>
+                <form method="POST" action="/logout">
+                    <button id="log-out-button">Log Out</button>
+                </form>
+            </div>
+        </div>
+
+      <div class="add-item-form">
+        <h2>{{ bucket.name }}</h2>
         <form method="POST" action="/bucket/{{ bucket.Id }}/add_item">
             <input type="text" name="item">
             <button>Add Item</button>
         </form>
+      </div>
 
-        <ul class="bucket">
-        {% for item in bucket.items %}
-            <li id="{{ item['Id']}}">
-                {{ item['body'] }}
-                <a href="/bucket/{{ bucket.Id }}/edit_item/{{ item['Id'] }}"><button class="btn btn-success" data-toggle="modal" data-target="#{{ item['Id'] }}">Edit</button></a>
-                <form method="POST", action="/bucket/{{ bucket.Id }}/remove_item/{{ item['Id'] }}">
-                    <button class="btn btn-danger" type="submit">X</button>
-                </form>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in bucket.items %}
+              <tr>
+                <td>{{ item['body'] }}</td>
+                
+                <td>
+                  <a href="/bucket/{{ bucket.Id }}/edit_item/{{ item['Id'] }}"><button class="btn btn-success" data-toggle="modal" data-target="#{{ item['Id'] }}">Edit</button></a>
+                </td>
+                
+                <td>
+                  <form method="POST", action="/bucket/{{ bucket.Id }}/remove_item/{{ item['Id'] }}">
+                      <button class="btn btn-danger" type="submit">X</button>
+                  </form>
+                </td>
 
                 <div id="{{ item['Id']}}" class="modal fade" role="dialog">
                   <div class="modal-dialog">
@@ -44,10 +70,11 @@
                     </div>
 
                   </div>
-                </div> 
-            </li>
-        {% endfor %}
-        </ul>
+                </div>
+              </tr>
+              {% endfor %}
+            </tbody> 
+          </table>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../static/bootstrap/js/bootstrap.min.js"></script>

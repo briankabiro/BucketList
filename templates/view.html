@@ -1,18 +1,18 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
 	<title>Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="../static/view.css">
+
     <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
+  
         <div class="header">
-
             <a href="/"><h2>bucketlist</h2></a>
             <div class="right-header-items">
                 <span id="hello-text">Hello, {{ user }}</span>
@@ -21,56 +21,72 @@
                 </form>
             </div>
         </div>
+        
         <div class="main">
-            
+            <form name="createBucket" id="create-bucket-form" method="POST", action="/view/create_bucket">
+                <input type="text" placeholder="Bucket Name" name="bucket" id="title" required>
+                <button type="submit" id="create-button">Create Bucket</button>
+            </form>
+
             <div id="top-area">
                 <h2>Your bucket lists</h2>
             </div>
 
-            <form name="createBucket" id="create-bucket-form" method="POST", action="/view/create_bucket">
-                <input type="text" placeholder="Bucket Name" name="bucket" id="title" value="{{ request.form.title }}" required>
-                <input type="submit" id="create-button" value="Create Bucket">
-            </form>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <td>Title</td>
+                            <td>Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bucket in data %}
+                        <tr>
+                            <td>
+                                <h2>{{ bucket.name }}</h2>
+                            </td>
 
-            <div class="bucket-lists">
-                <ul class = "list-group" >
-                {% for bucket in data %}
-                    <li class="list-group-item" >
-                        {{ bucket.name }}
-                        <a href="/bucket/{{ bucket['Id'] }}"><button class="btn btn-primary">View</button></a>
-                        <button class="btn btn-success" data-toggle="modal" data-target="#{{ bucket['Id'] }}">Edit</button>
-                        <form method="POST", action="/bucket/delete_bucket/{{ bucket['Id'] }}">
-                            <button class="btn btn-danger" type="submit">X</button>
-                        </form>
-                        <div id="{{ bucket['Id'] }}" class="modal fade" role="dialog">
-                          <div class="modal-dialog">
+                            <td>
+                                <a href="/bucket/{{ bucket['Id'] }}"><button class="btn btn-primary">View</button></a>
+                            </td>
+                            <td> 
+                                <button class="btn btn-success" data-toggle="modal" data-target="#{{ bucket['Id'] }}">Edit</button>
+                            </td>      
+                            <td>
+                                <form method="POST", action="/bucket/delete_bucket/{{ bucket['Id'] }}">
+                                        <button class="btn btn-danger" type="submit">X</button>
+                                </form>
+                            </td>
+                                
+                                <div id="{{ bucket['Id'] }}" class="modal fade" role="dialog">
+                                  <div class="modal-dialog">
 
-                            <!-- Content of modal-->
-                            <div class="modal-content">
+                                    <!-- Content of modal-->
+                                    <div class="modal-content">
 
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Edit Title</h4>
-                              </div>
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit Title</h4>
+                                      </div>
 
-                              <div class="modal-body">
-                                  <form method="POST" action="/bucket/edit_bucket/{{ bucket['Id'] }}">
-                                    <input type="text" name="title">
-                                    <button>Change</button>
-                                  </form>
-                              </div>
+                                      <div class="modal-body">
+                                          <form method="POST" action="/bucket/edit_bucket/{{ bucket['Id'] }}">
+                                            <input type="text" name="title">
+                                            <button>Change</button>
+                                          </form>
+                                      </div>
 
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
 
-                          </div>
-                        </div>                        
-                    </li>
-            {% endfor %}
-            </ul>
-            </div>
+                                  </div>
+                                </div> 
+                          </tr>   
+                    {% endfor %}
+                  </tbody>
+                </table>
         
         </div>
     </div> 
