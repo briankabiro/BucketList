@@ -1,0 +1,11 @@
+from models.user import User
+import unittest
+
+class TddinUser(unittest.TestCase):
+    def setUp(self):
+        # create a User object
+        self.user = User("user", "1234", 1)
+
+    def Test_user_created(self):
+        # test if the user has been created
+        self.assertEqual(self.user.name, "user")
