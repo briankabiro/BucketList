@@ -167,7 +167,7 @@ def edit_item(bucket_id, item_id):
 def logout():
     # logout a user
     session.pop('username')
-    Flask.flash('You have been logged out')
+    flash('You have been logged out')
     return redirect(url_for('index'))
 
 
