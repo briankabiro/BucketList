@@ -11,11 +11,16 @@
 	</div>	
 	<div class="main">
 		<h2>Sign Up for Bucket List</h2>
+
 		<form action="/signup" method="POST">
 			{{ form.hidden_tag() }}
 			{{ wtf.form_field(form.username) }}
+			{% if error %}
+				<p style="color:red">{{ error }}</p>
+			{% endif %}
 			{{ wtf.form_field(form.password) }}
 			<button>Sign Up</button>
+
 		</form>
 		<p id="bottom-paragraph">Already have an account? <a href="login">Login</a></p>
 	</div>

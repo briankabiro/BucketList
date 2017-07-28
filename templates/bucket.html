@@ -5,9 +5,10 @@
     <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
-    <div>
+    <div class="container-fluid">
+    
         <div class="header">
-            <a href="/view"><h2>Home</h2></a>
+            <a href="/view"><h4>Home</h4></a>
             <div class="right-header-items">
                 <span id="hello-text">Hello, {{ user }}</span>
                 <form method="POST" action="/logout">
@@ -17,7 +18,7 @@
         </div>
 
       <div class="add-item-form">
-        <h2>{{ bucket.name }}</h2>
+        <h3>{{ bucket.name }}</h3>
         <form method="POST" action="/bucket/{{ bucket.Id }}/add_item">
             <input type="text" name="item">
             <button>Add Item</button>

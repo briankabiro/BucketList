@@ -9,8 +9,6 @@
 	background-color: #23233c;
 	display:flex;
 	align-items: center;
-	margin-top: -1em;
-	margin-left: -0.5em;
 	flex:1;
 	justify-content: space-between;
 }
@@ -42,18 +40,20 @@
 	height:2em;
 	cursor:pointer;
 }
+
 #create-button-form{
 	margin-bottom:1em;
 }
+
 #create-button{
 	background:#0BDA85;
 	border:none;
 	border-radius:2%;
 	color:#F9FAFE;
 	font-weight: bold;
-	height:2em;
 	cursor:pointer;
 	margin-left: 1em;
+	padding:1em;
 }
 
 #hello-text{
