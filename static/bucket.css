@@ -1,0 +1,43 @@
+.header{
+	background-color: #23233c;
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+	height:4em;
+	margin-top: 1em;
+}
+
+.header a{
+	color:white;
+	text-decoration: none;
+	font-family: Calibri;
+	margin-left: 2em;
+	font-size:0.9em;
+}
+
+.right-header-items{
+	display: flex;
+	align-items: center;
+}
+
+.right-header-items *{
+	margin-right: 2em;
+	font-family: Calibri;
+}
+
+#log-out-button{
+	background:#F9FAFE;
+	border:none;
+	border-radius:2%;
+	color:#23233c;
+	font-weight: bold;
+	height:2em;
+	cursor:pointer;
+}
+
+#add-item-form{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	background-color: red;
+}

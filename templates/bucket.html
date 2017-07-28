@@ -1,0 +1,83 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../static/bucket.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+    
+        <div class="header">
+            <a href="/view"><h4>Home</h4></a>
+            <div class="right-header-items">
+                <span id="hello-text">Hello, {{ user }}</span>
+                <form method="POST" action="/logout">
+                    <button id="log-out-button">Log Out</button>
+                </form>
+            </div>
+        </div>
+
+      <div class="add-item-form">
+        <h3>{{ bucket.name }}</h3>
+        <form method="POST" action="/bucket/{{ bucket.Id }}/add_item">
+            <input type="text" name="item">
+            <button>Add Item</button>
+        </form>
+      </div>
+
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in bucket.items %}
+              <tr>
+                <td>{{ item['body'] }}</td>
+                
+                <td>
+                  <button class="btn" data-toggle="modal" data-target="#{{ item['Id'] }}">Edit</button></a>
+                </td>
+                
+                <td>
+                  <form method="POST", action="/bucket/{{ bucket.Id }}/remove_item/{{ item['Id'] }}">
+                      <button class="btn btn-danger" type="submit">X</button>
+                  </form>
+                </td>
+
+                <div id="{{ item['Id']}}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Content of modal-->
+                    <div class="modal-content">
+
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit Item</h4>
+                      </div>
+
+                      <div class="modal-body">
+                          <form name="edit-form" method="POST" action="/bucket/{{ bucket['Id'] }}/edit_item/{{ item['Id'] }}">
+                            <input type="text" name="new_text">
+                          </form>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </tr>
+              {% endfor %}
+            </tbody> 
+          </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

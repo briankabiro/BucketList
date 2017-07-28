@@ -1,42 +1,98 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="../static/view.css">
+
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
+  
         <div class="header">
-            <a href="/"><h2>bucketlist</h2></a>
+            <a href="/view"><h4>Home</h4></a>
             <div class="right-header-items">
-                <!--Add hello,name of user -->
-                <button id="create-button">Create a bucket</button>
                 <span id="hello-text">Hello, {{ user }}</span>
-                <button id="log-out-button">Log Out</button>
+                <form method="POST" action="/logout">
+                    <button id="log-out-button">Log Out</button>
+                </form>
             </div>
         </div>
+        
         <div class="main">
-            
+            <form name="createBucket" id="create-bucket-form" method="POST", action="/view/create_bucket">
+                <input type="text" placeholder="Bucket Name" name="bucket" id="title" required>
+
+                <button type="submit">Create Bucket</button>
+            </form>
+
             <div id="top-area">
                 <h2>Your bucket lists</h2>
             </div>
 
-            <div class="bucket-lists">
-                <div id="bucket-list">
-                        <input type="text" id='title-input' name="title" placeholder="Name of the bucket" required>
-                        
-                        <form id="add-item-form">
-                            <input id= "add-item-input" type="text" name="add-item-input" required>
-                            <button>Add an Item</button>
-                        </form>
-                    
-                    <div id="items-list"></div>
-                    <button id="delete-button">DELETE</button>
-                </div>
-            </div>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <td>Title</td>
+                            <td>Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bucket in data %}
+                        <tr>
+                            <td>
+                                <h2>{{ bucket.name }}</h2>
+                            </td>
+
+                            
+                                <td><a href="/bucket/{{ bucket['Id'] }}"><button class="btn btn-primary">View</button></a></td>
+                            
+                            
+                                <td><button class="btn btn-success" data-toggle="modal" data-target="#{{ bucket['Id'] }}">Edit</button></td>
+                                 
+                            
+                                <td>
+                                    <form method="POST", action="/bucket/delete_bucket/{{ bucket['Id'] }}">
+                                            <button class="btn btn-danger" type="submit">X</button>
+                                    </form>
+                                </td>
+                                
+                                <div id="{{ bucket['Id'] }}" class="modal fade" role="dialog">
+                                  <div class="modal-dialog">
+
+                                    <!-- Content of modal-->
+                                    <div class="modal-content">
+
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit Title</h4>
+                                      </div>
+
+                                      <div class="modal-body">
+                                          <form method="POST" action="/bucket/edit_bucket/{{ bucket['Id'] }}">
+                                            <input type="text" name="title">
+                                          </form>
+                                      </div>
+
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div> 
+                          </tr>   
+                    {% endfor %}
+                  </tbody>
+                </table>
+        
         </div>
     </div> 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="../static/view.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

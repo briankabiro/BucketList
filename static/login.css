@@ -13,7 +13,6 @@
 	color:#fff;
 	margin-left: 0.1em;
 	font-family: Calibri;
-	margin-left: 2em;
 }
 
 .header h2 a{
@@ -24,7 +23,7 @@
 .main{
 	display: flex;
 	flex:12;
-	flex-flow:column; nowrap;
+	flex-flow:column;
 	align-items: center;
 }
 
