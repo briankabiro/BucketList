@@ -21,7 +21,6 @@ app = Flask(
     template_folder='./templates')
 
 app.config['SECRET_KEY'] = "secret_key"
-
 Bootstrap(app)
 
 @app.route('/')
@@ -37,12 +36,16 @@ def signup():
     error = None
     form = RegisterForm()
     if form.validate_on_submit():
+        for i in users:
+            if i.name == form.username.data:
+                error = "Username already taken"
+                return render_template("signup.html", form=form, error = error)
         new_user = User(form.username.data, form.password.data, userCount)
         userCount += 1
         users.append(new_user)
         session['username'] = new_user.name
         return redirect(url_for('view'))
-    return render_template("signup.html", form=form)
+    return render_template("signup.html", form=form, error = error)
 
 
 @app.route('/login', methods=['GET','POST'])
@@ -57,8 +60,7 @@ def login():
                     session['username'] = user.name
                     return redirect(url_for('view'))
             error = 'Invalid credentials'
-            return redirect(url_for('login'))
-    return render_template("login.html", form=form)
+    return render_template("login.html", form=form, error = error)
 
 
 @app.route('/view', methods=['GET'])
@@ -81,7 +83,6 @@ def create_bucket():
     if session['username'] in buckets:
         global bucketCount
         data = request.form.to_dict()
-        print("this is data", data)
         bucket = data['bucket']
         new_bucket = Bucket(bucket, bucketCount)
         bucketCount += 1
@@ -119,7 +120,6 @@ def delete_bucket(bucket_id):
     for i in buckets[session['username']]:
         if str(i.Id) == bucket_id:
             buckets[session['username']].remove(i)
-            print("this is buckets after deleting", buckets)
     return redirect(url_for('view'))
 
 @app.route('/bucket/<bucket_id>/add_item', methods=['POST'])
@@ -159,9 +159,6 @@ def edit_item(bucket_id, item_id):
         bucket = bucket[0]
         item = [i for i in bucket.items if str(i['Id']) == item_id]
         item = item[0]
-        print('this is item', item)
-        print('this is bucket',bucket)
-        
         bucket.update_item(item_id, new_text)
         return redirect('/bucket/' + bucket_id)
 
@@ -170,7 +167,7 @@ def edit_item(bucket_id, item_id):
 def logout():
     # logout a user
     session.pop('username')
-    flash('You have been logged out')
+    Flask.flash('You have been logged out')
     return redirect(url_for('index'))
 
 
