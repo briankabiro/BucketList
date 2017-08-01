@@ -1,14 +1,18 @@
 language: python
 python:
-  - 3.6
+  - "3.6"
 install: 
   - pip install -r requirements.txt
-  - pip install coveralls
-  - pip install coverage
+  - "pip install coveralls"
+  - "pip install coverage"
+  
 script:
-  - nosetests --with-coverage
+  - "nosetests --with-coverage && coverage report"
+  - "coveralls"
+
 notifications:
   email: false
+
 after_success:
   coveralls
   - CODECLIMATE_REPO_TOKEN=469c8ffbc923a6c578646ce4503b2ae84b591792c301a4e53bd0a8c74ef22414 codeclimate-test-reporter
