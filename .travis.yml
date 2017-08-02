@@ -7,7 +7,7 @@ install:
   - "pip install coverage"
   
 script:
-  - "nosetests --with-coverage && coverage report"
+  - "nosetests --with-coverage --cover-package=app"
   - "coveralls"
 
 notifications:
