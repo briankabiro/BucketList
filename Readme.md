@@ -4,7 +4,8 @@
 
 # Bucket List
 
-This is a bucket list application that allows users to create accounts and to login. Once logged in, a user can create a bucket list and add items to it.
+This is a bucket list application that allows users to create accounts and to login. Once logged in, a user can create a bucket list and add items to it. For a live demo of the app, click [here](https://afternoon-island-16667.herokuapp.com/)
+
 
 ## Getting Started
 
@@ -17,15 +18,16 @@ What things you need to install the software and how to install them
 ```
 Python 3
 ```
+
 ## How to Setup the Project
-1. Clone the repo by running ```git clone https://github.com/briankabiro/Bucket-List.git```.
+1. Clone the repo by running ```git clone https://github.com/briankabiro/BucketList.git```.
 2. Install dependencies as per the requirements.txt file within your virtual environment. ```pip install -r requirements.txt```.
-3. Start the app by running ```python app.py```
+3. Start the app by running ```python run.py```
 
 
 ## Built With
 
-* [Flask](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Flask](http://flask.pocoo.org/) - The web framework used
 * [Bootstrap](http://getbootstrap.com/) - Frontend Framework
 
 
@@ -38,11 +40,6 @@ All contributions are welcome. Pull requests must be clear and precise.
 
 * **Brian Kabiro** - *Initial work* - [bkkr](https://github.com/briankabiro)
 
-See also the list of [contributors](https://github.com/briankabiro/Bucket-List/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
