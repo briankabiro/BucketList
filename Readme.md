@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/briankabiro/BucketList.svg?branch=develop)](https://travis-ci.org/briankabiro/BucketList)
-[![Coverage Status](https://coveralls.io/repos/github/briankabiro/BucketList/badge.svg?branch=master)](https://coveralls.io/github/briankabiro/BucketList?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/briankabiro/BucketList/badge.svg?branch=develop)](https://coveralls.io/github/briankabiro/BucketList?branch=develop)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/briankabiro/BucketList)
 
 # Bucket List
