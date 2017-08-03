@@ -4,14 +4,9 @@ from app import app
 class AppTest(unittest.TestCase):
 	def setUp(self):
 		self.client = app.test_client()
-
-	def Test_homepage(self):
-		response = self.client.get('/')
-		print('this is the respnse',response)
-		self.assertEqual(response.status,'200 OK')
-
-	def register(self,username,password):
-		return self.client.post('/register',
+	# helper methods
+	def signup(self,username,password):
+		return self.client.post('/signup',
 			data=dict(username=username, password=password),
 			follow_redirects=True)
 		
@@ -20,17 +15,28 @@ class AppTest(unittest.TestCase):
 
 	def logout(self):
 		return self.client.post('/logout',follow_redirects=True)
-'''
-	def Test_Register_Page(self):
-		response = self.client.get('/register/')
-		print("this is the response",response)
+
+	#Tests
+	def Test_homepage(self):
+		response = self.client.get('/')
+		print('this is the respnse',response)
 		self.assertEqual(response.status,'200 OK')
 
+	def Test_signup_page(self):
+		response = self.client.get('/signup')
+		self.assertEqual(response.status,'200 OK')
+
+
+	def Test_login_page(self):
+		response = self.client.get('/login')
+		self.assertEqual(response.status, '200 OK')
+
+'''
 	def Test_User_is_Registered(self):
-		response = self.register("lee","12345")
-		self.assertEqual(response.status_code,'200 OK')
+		response = self.signup("lee","12345")
+		self.assertEqual(session['username'], 'lee')
 
 	def Test_logout(self):
-		self.register('lee','12345')
+		self.signup('lee','12345')
 		return self.client.post('/logout', follow_redirects=True)
-		'''
+'''
