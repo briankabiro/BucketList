@@ -9,6 +9,6 @@ class TddinUser(unittest.TestCase):
     def Test_user_created(self):
         # test if the user has been created
         self.assertEqual(self.user.name, "user")
-        
+
     def Test_user_name_returned(self):
-    	self.assertEqual(self.return_name,'user')
+    	self.assertEqual(self.user.return_name(),'user')
