@@ -2,8 +2,8 @@ from flask import Flask, session, render_template, redirect, url_for, request, f
 from flask_bootstrap import Bootstrap
 from app.forms import LoginForm, RegisterForm
 from app import app
-from models.bucket import Bucket
-from models.user import User
+from app.models.bucket import Bucket
+from app.models.user import User
 buckets = {}
 users = []
 

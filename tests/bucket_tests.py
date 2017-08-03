@@ -1,5 +1,5 @@
 import unittest
-from models.bucket import Bucket
+from app.models.bucket import Bucket
 
 class TddinBucketlist(unittest.TestCase):
     def setUp(self):
