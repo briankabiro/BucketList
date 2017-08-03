@@ -36,12 +36,29 @@ class AppTest(unittest.TestCase):
 		response = self.signup("lee","12345")
 		self.assertIn(b'Home', response.data)
 
+	def Test_user_exists(self):
+		response = self.signup('lee','12345')
+		self.assertIn(b'Username already taken', response.data)
+
 	def Test_login(self):
 		self.signup('becky','laland')
 		self.logout()
-		response =self.login('becky','laland')
+		response = self.login('becky','laland')
 		self.assertIn(b'Home',response.data)
 
+	def Test_Invalid_login(self):
+		self.signup('John','13131')
+		self.logout()
+		response = self.login('John','112233')
+		print('this is the response',response.data)
+		self.assertIn(b'Invalid credentials',response.data)
+	
+	def Test_bucket_is_created_and_deleted(self):
+		self.signup('Jane','14141')
+		response = self.client.post('/view/create_bucket',data=dict(bucket="Hiking"),follow_redirects=True)
+		self.assertIn(b'Hiking',response.data)
+		response = self.client.post('/bucket/delete_bucket/0',follow_redirects=True)
+		self.assertNotIn(b'Hiking',response.data)
 
 	def Test_logout(self):
 		self.signup('john','12345')
