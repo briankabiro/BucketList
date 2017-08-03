@@ -6,5 +6,6 @@ app = Flask(
     template_folder='../templates')
 
 app.config['SECRET_KEY'] = "secret_key"
+app.config['WTF_CSRF_SECRET_KEY'] = "socratis_key"
 
 from app import views
