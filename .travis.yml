@@ -7,7 +7,7 @@ install:
   - "pip install coverage"
   
 script:
-  - "nosetests --with-coverage"
+  - "nosetests --with-coverage --cover-erase"
 
 notifications:
   email: false
