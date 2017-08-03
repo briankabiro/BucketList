@@ -1,0 +1,7 @@
+[report]
+omit =
+	*/myenv/*
+	*/tests/*
+    */python?.?/*
+    */python?.?-dev/*
+    */site-packages/nose/*

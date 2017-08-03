@@ -1,5 +1,5 @@
-from models.user import User
 import unittest
+from app.models.user import User
 
 class TddinUser(unittest.TestCase):
     def setUp(self):
