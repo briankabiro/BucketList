@@ -4,7 +4,9 @@ from app import app
 class AppTest(unittest.TestCase):
 	def setUp(self):
 		self.client = app.test_client()
+		app.config['WTF_CSRF_ENABLED'] = False
 	# helper methods
+
 	def signup(self,username,password):
 		return self.client.post('/signup',
 			data=dict(username=username, password=password),
@@ -19,7 +21,6 @@ class AppTest(unittest.TestCase):
 	#Tests
 	def Test_homepage(self):
 		response = self.client.get('/')
-		print('this is the respnse',response)
 		self.assertEqual(response.status,'200 OK')
 
 	def Test_signup_page(self):
@@ -31,12 +32,18 @@ class AppTest(unittest.TestCase):
 		response = self.client.get('/login')
 		self.assertEqual(response.status, '200 OK')
 
-'''
-	def Test_User_is_Registered(self):
+	def Test_signup(self):
 		response = self.signup("lee","12345")
-		self.assertEqual(session['username'], 'lee')
+		self.assertIn(b'Home', response.data)
+
+	def Test_login(self):
+		self.signup('becky','laland')
+		self.logout()
+		response =self.login('becky','laland')
+		self.assertIn(b'Home',response.data)
+
 
 	def Test_logout(self):
-		self.signup('lee','12345')
-		return self.client.post('/logout', follow_redirects=True)
-'''
+		self.signup('john','12345')
+		response = self.logout()
+		self.assertIn(b'Bucket List',response.data)
